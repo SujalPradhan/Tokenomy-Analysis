@@ -1,0 +1,9 @@
+id,description,low,base,high,unit,justification,source
+inference_share,Inference share of AI compute capex,0.3,0.4,0.5,ratio,Inference is growing vs training but still a minority of total AI capex.,industry_estimate
+utilization,Accelerator utilization rate,0.3,0.5,0.7,ratio,Typical utilization for production inference workloads.,industry_estimate
+useful_life,Server useful life,4,5,6,years,Cloud providers typically amortize over 4-6 years.,company_10K
+input_mix,Input vs output token mix,0.7,0.8,0.9,ratio,User prompts and context windows heavily outweigh generated output.,industry_estimate
+power_cost,Power cost per kWh,0.05,0.08,0.12,USD,Wholesale data center power cost.,industry_estimate
+capex_ai_share,Share of total capex dedicated to AI,0.4,0.6,0.8,ratio,Recent capex surges are almost entirely AI driven.,industry_estimate
+accelerator_cost,Hourly amortized cost of an accelerator (e.g. H100),1.5,2.0,3.0,USD,Blended estimate of hardware cost + power + overhead.,industry_estimate
+tokens_per_sec,Tokens per second per accelerator (avg model),1000,2000,4000,tokens,Throughput for a typical 70B-class model.,industry_estimate

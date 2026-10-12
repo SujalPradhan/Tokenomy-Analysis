@@ -1,0 +1,8 @@
+company,model_id,tier,input_per_1M,output_per_1M,cached_per_1M,batch_per_1M,effective_from,effective_to,source_url
+Alphabet,Gemini 3.1 Pro,on_demand,2.00,12.00,1.00,1.00,2026-01-01,2026-12-31,google.com
+Alphabet,Gemini 3.8 Flash,on_demand,0.75,3.75,0.35,0.35,2026-01-01,2026-12-31,google.com
+Amazon,Claude 3.5 Sonnet,on_demand,6.00,30.00,3.00,3.00,2025-01-01,2026-12-31,amazon.com
+Amazon,Claude 4.6 Sonnet,on_demand,3.00,15.00,1.50,1.50,2026-06-01,2026-12-31,amazon.com
+Meta,Llama 3 70B,on_demand,0.50,0.50,0.25,0.25,2024-04-01,2026-12-31,meta.com
+Apple,Apple Intelligence,internal,0,0,0,0,2024-06-01,2026-12-31,apple.com
+Netflix,Netflix Internal,internal,0,0,0,0,2024-01-01,2026-12-31,netflix.com

@@ -1,0 +1,14 @@
+node_id,level,parent_id,statement,status,confidence,evidence_row_ids
+node_0,0,,How does internal developer AI usage translate into workforce output and productivity?,supported,high,
+node_1,1,node_0,Internal AI usage by developers and employees drove a 40% to 75% surge in code generation and task velocity, shifting the human bottleneck from writing code to code review and architecture.,supported,high,
+node_1_1,2,node_1,CODE GENERATION VELOCITY (Google & Meta): Internal AI generation surged from 25% (2024) to 75% (2026) of all newly committed code.,supported,high,fact_google_2024,fact_google_2025,fact_google_2026,fact_meta_2026_target
+node_1_2,2,node_1,PULL REQUEST & TASK THROUGHPUT (Microsoft): Empirical analysis of 16000+ engineers showed 40.5% higher PR throughput and 55% faster task speed.,supported,high,fact_msft_2024_pr,fact_msft_2024_speed,fact_msft_2025_sec
+node_1_3,2,node_1,LARGE-SCALE SYSTEM MODERNIZATION (Amazon): Amazon Q Developer saved 4500 developer-years by shrinking app migration from 50 days to hours.,supported,high,fact_amazon_2025_years,fact_amazon_2025_time,fact_amazon_2025_accept
+node_1_4,2,node_1,AUTONOMOUS MULTI-AGENT SHIPPING (Stripe): Autonomous Minions agents land ~1300 PRs per week directly from Slack workflows.,supported,high,fact_stripe_2025_prs,fact_stripe_2026_prs
+node_1_5,2,node_1,KNOWLEDGE WORKER LEVERAGE & HYBRID LIMITS (Klarna): Internal AI handled workload of 700-850 FTEs before pivoting to a hybrid quality model.,supported,high,fact_klarna_2024_fte,fact_klarna_2025_fte
+node_2_1,3,node_1_1,Google CEO Sundar Pichai confirmed AI wrote 25% of code in late 2024, rising to 50% in 2025 and ~75% in 2026.,supported,high,fact_google_2024,fact_google_2026
+node_2_2,3,node_1_1,Meta internal engineering set targets for 50% to 75% of code written by AI agents.,supported,high,fact_meta_2026_target
+node_3_1,3,node_1_2,Microsoft 16000 engineer empirical study demonstrated 40.5% more PRs completed and 55% faster task execution.,supported,high,fact_msft_2024_pr,fact_msft_2024_speed
+node_4_1,3,node_1_3,Amazon upgraded 50% of production Java applications in under 6 months with 79% acceptance rate without human edits.,supported,high,fact_amazon_2025_accept,fact_amazon_2025_time
+node_5_1,3,node_1_4,Stripe Minions scaled from 500 PRs/week to 1300 PRs/week autonomously tested and merged.,supported,high,fact_stripe_2025_prs,fact_stripe_2026_prs
+node_6_1,3,node_1_5,Klarna cut resolution time from 11 min to under 2 min, handling 2.3M chats in month 1.,supported,high,fact_klarna_2024_fte,fact_klarna_2024_res
