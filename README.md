@@ -1,6 +1,6 @@
 # Tokenomy Analysis: Developer AI Usage vs. Engineering Output (2024–2026)
 
-Interactive Executive Briefing and empirical research analyzing how internal AI adoption across Google, Microsoft, Amazon, Stripe, and Meta, plus an expansion set (FactSet, Zeta Global, Compass, N-able, Cognizant, Accenture, MercadoLibre, Shopify), translated into software delivery output, pull request throughput, and system modernization.
+Interactive Executive Briefing and empirical research analyzing how internal AI adoption across **67 companies** (Google, Microsoft, Amazon, Meta, Stripe and a 57-company disclosure register including HubSpot, Airbnb, Uber, DoorDash, IBM, Salesforce, Bank of America, Baidu and MakeMyTrip) translated into code share, pull request throughput, and system modernization. Every figure is quoted verbatim from a checked source.
 
 ## 🚀 Live Briefing
 👉 **[View the Live Executive Briefing](https://sujalpradhan.github.io/Tokenomy-Analysis/)**

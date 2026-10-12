@@ -12,11 +12,11 @@ Stripe,2025,not_found,not_found,no_primary_source
 Stripe,2026,found,found,verified_stripe_engineering_blog
 Meta,2024,not_found,not_found,no_primary_source
 Meta,2025,found,not_found,target_only_media_report
-Meta,2026,found,not_found,target_only_leaked_doc_media_report
+Meta,2026,found,found,target_only_leaked_doc_media_report
 Klarna,2024,found,found,verified_klarna_press_release
 Klarna,2025,found,found,reported_media_not_primary
 Klarna,2026,not_found,not_found,no_primary_source
-FactSet,2026,found,not_found,verified_earnings_transcript
+FactSet,2026,found,found,verified_earnings_transcript
 Zeta Global,2026,found,not_found,verified_earnings_transcript
 Compass,2026,found,found,verified_earnings_transcript
 N-able,2026,found,anecdotal_only,verified_earnings_transcript
@@ -27,3 +27,59 @@ MercadoLibre,undated,found,found,verified_vendor_case_study
 Shopify,2026,found,found,verified_engineering_blog
 Cisco,2026,not_found,not_found,telemetry_gap_no_primary_disclosure
 GitLab,2026,not_found,not_found,telemetry_gap_customer_metrics_only
+Dropbox,2026,found,not_found,verified_company_blog
+Anthropic,2026,found,not_found,verified_company_blog
+Augment Code,2026,found,not_found,verified_company_blog
+Grindr,2026,found,not_found,verified_earnings_call_transcript
+Uber,2026,found,found,verified_earnings_call_transcript
+Vercel,2026,found,not_found,verified_company_blog
+Spotify,2026,found,not_found,reported_vendor_page
+DocuSign,2026,found,not_found,verified_earnings_call_transcript
+Cognition,2026,found,not_found,verified_company_blog
+nCino,2026,found,not_found,verified_earnings_call_transcript
+Airbnb,2026,found,not_found,verified_earnings_call_transcript
+DoorDash,2026,found,not_found,verified_earnings_call_transcript
+Fubo,2026,found,not_found,verified_earnings_call_transcript
+Chime,2026,found,not_found,verified_earnings_call_transcript
+Freshworks,2026,found,not_found,verified_earnings_call_transcript
+ADT,2026,found,not_found,verified_earnings_call_transcript
+Gemini Space Station,2026,found,not_found,verified_earnings_call_transcript
+Domo,2026,found,not_found,verified_earnings_call_transcript
+Cursor,2026,found,not_found,verified_company_blog
+Workday,2026,found,not_found,verified_earnings_call_transcript
+GoDaddy,2026,found,not_found,verified_earnings_call_transcript
+Genspark,2026,found,not_found,reported_interview
+OpenAI,2026,found,not_found,reported_media_report
+Pinterest,2025,found,not_found,verified_earnings_call_transcript
+Pinterest,2026,found,not_found,verified_earnings_call_transcript
+HubSpot,2026,found,not_found,verified_earnings_call_transcript
+Visa,2025,found,not_found,verified_earnings_call_transcript
+Coinbase,2025,found,not_found,verified_ceo_post
+Coinbase,2026,not_found,found,verified_earnings_call_transcript
+Instacart,2025,found,not_found,verified_earnings_call_transcript
+Block,2026,found,found,verified_sec_filing
+Snap,2026,found,not_found,verified_earnings_call_transcript
+Ziff Davis,2026,found,not_found,verified_earnings_call_transcript
+1stdibs,2026,found,not_found,verified_earnings_call_transcript
+Baidu,2025,found,not_found,verified_earnings_call_transcript
+Robinhood,2026,not_found,found,verified_earnings_call_transcript
+Salesforce,2025,not_found,found,verified_earnings_call_transcript
+Bank of America,2026,not_found,found,verified_earnings_call_transcript
+Grab,2026,not_found,found,verified_ir_document
+Lyft,2026,found,not_found,verified_earnings_call_transcript
+Infosys,2026,not_found,found,verified_sec_filing
+Cloudflare,2026,found,not_found,verified_earnings_call_transcript
+monday.com,2026,not_found,found,verified_earnings_call_transcript
+eToro,2026,not_found,found,verified_earnings_call_transcript
+ZoomInfo,2026,found,not_found,verified_earnings_call_transcript
+Angi,2026,not_found,found,verified_earnings_call_transcript
+First American,2026,found,not_found,verified_earnings_call_transcript
+IBM,2026,not_found,found,verified_earnings_call_transcript
+Intuit,2025,not_found,found,verified_earnings_call_transcript
+MakeMyTrip,2026,found,not_found,verified_earnings_call_transcript
+MercadoLibre,2026,found,not_found,verified_earnings_call_transcript
+Citi,2025,not_found,found,reported_media_report
+JPMorgan Chase,2025,not_found,found,reported_media_report
+Morgan Stanley,2025,not_found,found,reported_media_report
+Tencent,undated,found,not_found,reported_media_report
+Alibaba,undated,found,not_found,reported_media_report
