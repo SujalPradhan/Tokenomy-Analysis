@@ -1,8 +1,8 @@
-company,model_id,tier,input_per_1M,output_per_1M,cached_per_1M,batch_per_1M,effective_from,effective_to,source_url
-Alphabet,Gemini 3.1 Pro,on_demand,2.00,12.00,1.00,1.00,2026-01-01,2026-12-31,google.com
-Alphabet,Gemini 3.8 Flash,on_demand,0.75,3.75,0.35,0.35,2026-01-01,2026-12-31,google.com
-Amazon,Claude 3.5 Sonnet,on_demand,6.00,30.00,3.00,3.00,2025-01-01,2026-12-31,amazon.com
-Amazon,Claude 4.6 Sonnet,on_demand,3.00,15.00,1.50,1.50,2026-06-01,2026-12-31,amazon.com
-Meta,Llama 3 70B,on_demand,0.50,0.50,0.25,0.25,2024-04-01,2026-12-31,meta.com
-Apple,Apple Intelligence,internal,0,0,0,0,2024-06-01,2026-12-31,apple.com
-Netflix,Netflix Internal,internal,0,0,0,0,2024-01-01,2026-12-31,netflix.com
+company,model_id,tier,input_per_1M,output_per_1M,cached_per_1M,batch_per_1M,effective_from,effective_to,source_url,notes
+Alphabet,Gemini 3.1 Pro Preview,on_demand,2.00,12.00,0.20,1.00,,,https://ai.google.dev/gemini-api/docs/pricing,"Prompts <=200k tokens (>200k: $4.00/$18.00, cache $0.40). batch_per_1M = batch input price (batch output $6.00). Checked 2026-10-12."
+Alphabet,Gemini 3.8 Flash,on_demand,0.75,3.75,0.075,0.375,,2026-12-31,https://ai.google.dev/gemini-api/docs/pricing,Introductory price through 2026-12-31; $1.50/$7.50 from 2027-01-01. batch_per_1M = batch input (batch output $1.875). Checked 2026-10-12.
+"Amazon (Bedrock, Anthropic)",Claude 3.5 Sonnet,on_demand,3.00,15.00,,1.50,,,https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonBedrockFoundationModels/current/us-east-1/index.json,us-east-1. Previously listed as $6/$30 (wrong). No cache-read price listed for v1 (v2: $0.30). Model retired on the Anthropic API 2025-10-28. Checked 2026-10-12.
+"Amazon (Bedrock, Anthropic)",Claude Sonnet 4.6,on_demand,3.00,15.00,0.30,1.50,,,https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonBedrockFoundationModels/current/us-east-1/index.json,"Global endpoint, us-east-1 (regional CRIS: $3.30/$16.50, cache $0.33). Cache read previously listed as $1.50 (wrong). batch_per_1M = batch input (batch output $7.50). Checked 2026-10-12."
+Meta (via Amazon Bedrock),Llama 3 70B,on_demand,2.65,3.50,,,,,https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonBedrock/current/us-east-1/index.json,"Meta does not sell first-party API access; previous $0.50/$0.50 from ""meta.com"" was unsourced. No batch price for Llama 3 70B (Llama 3.1/3.3 70B: $0.72/$0.72). Checked 2026-10-12."
+Apple,Apple Intelligence,internal,,,,,,,,"No public per-token price. Previous zero values were placeholders, not data."
+Netflix,Netflix Internal,internal,,,,,,,,"No public per-token price. Previous zero values were placeholders, not data."

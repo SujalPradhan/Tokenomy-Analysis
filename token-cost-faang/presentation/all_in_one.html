@@ -18,6 +18,7 @@
     --c-stripe: #8b5cf6;
     --c-meta: #06b6d4;
     --c-klarna: #f43f5e;
+    --c-expansion: #475569;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -74,6 +75,13 @@
     transition: color 0.15s ease;
   }
   .nav-links a:hover { color: #f8fafc; }
+  @media (max-width: 768px) {
+    .header-bar { flex-wrap: wrap; gap: 8px; padding: 10px 16px; }
+    .nav-links { width: 100%; overflow-x: auto; gap: 12px; white-space: nowrap; }
+    .section-card { padding: 24px 18px; }
+    .inspect-bar { flex-wrap: wrap; gap: 10px; }
+    .insp-stats { flex-wrap: wrap; gap: 12px; }
+  }
 
   /* Layout Container */
   .container {
@@ -232,8 +240,27 @@
   .axis-title { font-size: 10px; font-weight: 700; fill: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
   .path-line { fill: none; transition: opacity 0.2s ease; }
   .dot-node { cursor: pointer; transition: transform 0.15s ease; }
-  .dot-node:hover circle { transform: scale(1.3); transform-origin: center; }
   .year-text { font-size: 9px; font-weight: 700; fill: #fff; pointer-events: none; text-anchor: middle; dominant-baseline: central; }
+  /* ○ Dashed node = management target / unverified claim (● solid = verified disclosure) */
+  .dot-node.unverified .mark { fill: #fff; stroke: currentColor; stroke-width: 2; stroke-dasharray: 3 2; }
+  .dot-node.unverified .year-text { fill: currentColor; }
+  .node-label { font-size: 10px; font-weight: 700; fill: #334155; pointer-events: none; }
+  .strip-row-label { font-size: 11px; font-weight: 700; fill: #0f172a; }
+  .strip-row-sub { font-size: 9px; fill: #64748b; }
+  .strip-range { stroke: #94a3b8; stroke-width: 6; stroke-linecap: round; opacity: 0.45; }
+
+  /* Verification key */
+  .verify-key { display: flex; flex-wrap: wrap; gap: 18px; font-size: 11px; color: var(--text-sub); margin: 0 0 12px; }
+  .verify-key span { display: inline-flex; align-items: center; gap: 6px; }
+  .key-solid { width: 11px; height: 11px; border-radius: 50%; background: #334155; display: inline-block; }
+  .key-dashed { width: 11px; height: 11px; border-radius: 50%; border: 2px dashed #334155; background: #fff; display: inline-block; }
+  .chart-note { font-size: 11px; color: var(--text-muted); margin-top: 8px; }
+  .key-range { width: 4px; height: 14px; border-radius: 2px; background: #94a3b8; display: inline-block; }
+  .range-bar { stroke: currentColor; stroke-width: 5; stroke-linecap: round; opacity: 0.3; }
+  .quote-line { font-size: 12px; font-style: italic; color: var(--text-sub); min-height: 18px; margin: -8px 0 12px; }
+  .dot-node:focus { outline: none; }
+  .dot-node:focus .mark, .dot-node:hover .mark { stroke: #0f172a; }
+  .company-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
   /* Legends Grid */
   .legend-grid {
@@ -260,10 +287,14 @@
   th { text-align: left; padding: 10px 12px; background: #f8fafc; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: #475569; border-bottom: 1px solid var(--border); }
   td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; font-size: 12px; vertical-align: top; }
   tr:last-child td { border-bottom: none; }
+  td:first-child { white-space: nowrap; }
   .mono { font-family: ui-monospace, monospace; font-weight: 700; }
   .badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
   .badge-verified { background: #dcfce7; color: #15803d; }
   .badge-reported { background: #e0f2fe; color: #0369a1; }
+  .badge-target { background: #fff; color: #b45309; border: 1px dashed #b45309; }
+  .badge-gap { background: #f1f5f9; color: #475569; }
+  .table-scroll { overflow-x: auto; }
   .ref-link { color: #0284c7; text-decoration: none; font-weight: 600; word-break: break-all; }
   .ref-link:hover { text-decoration: underline; }
 
@@ -302,6 +333,7 @@
     <a href="#summary">Overview</a>
     <a href="#trajectory">Trajectory</a>
     <a href="#telemetry">Telemetry</a>
+    <a href="#gap">Telemetry Gap</a>
     <a href="#workflows">Workflows</a>
     <a href="#takeaways">Takeaways</a>
     <a href="#references">References</a>
@@ -315,34 +347,34 @@
     <div class="section-kicker">Executive Summary</div>
     <h1>Inside Big Tech: Developer AI Usage &amp; Engineering Output</h1>
     <p class="lead">
-      Empirical disclosures from Google, Microsoft, Amazon, Stripe, and Meta on how internal AI adoption translated into pull request throughput, modernization velocity, and workforce capacity.
+      Empirical disclosures from Google, Microsoft, Amazon, and Stripe, plus an expansion set of FactSet, Zeta Global, Compass, N-able, Cognizant, Accenture, MercadoLibre, and Shopify, on how internal AI adoption translated into pull request throughput, modernization velocity, and workforce capacity.
     </p>
 
     <div class="callout">
       <strong>Core Discovery: The Bottleneck Inversion</strong><br>
-      AI makes generating code fast and inexpensive—Google now writes <strong>75% of new code with AI</strong>, and Microsoft engineers complete tasks <strong>55% faster</strong>. But writing code is no longer the bottleneck. The human engineering constraint has shifted entirely to <strong>code review, automated testing, and architectural validation</strong>.
+      AI is writing a fast-growing share of code. Google's AI-generated share of new code rose from <strong>&gt;25% (Oct 2024) to 75% (Apr 2026)</strong>, and Zeta Global reports <strong>89.6%</strong> (Q2 2026). But code share is not shipping output: almost no company ties these numbers to cycle time or delivery throughput. Our reading of the evidence is that the human constraint has shifted to <strong>code review, automated testing, and architectural validation</strong>.
     </div>
 
     <div class="metric-strip">
       <div class="m-card" style="border-top: 3px solid var(--c-google);">
         <div class="m-val" style="color:var(--c-google);">75%</div>
         <div class="m-lbl">Google (AI Code Share)</div>
-        <div class="m-sub">Up from 25% in late 2024 via Goose</div>
+        <div class="m-sub">Pichai, Apr 2026 · up from &gt;25% in Oct 2024</div>
       </div>
       <div class="m-card" style="border-top: 3px solid var(--c-amazon);">
         <div class="m-val" style="color:var(--c-amazon);">4,500</div>
         <div class="m-lbl">Amazon (Dev-Years Saved)</div>
-        <div class="m-sub">App upgrades: 50 days &rarr; hours</div>
+        <div class="m-sub">Java 17 upgrades: ~50 dev-days &rarr; hours (2024)</div>
       </div>
       <div class="m-card" style="border-top: 3px solid var(--c-msft);">
         <div class="m-val" style="color:var(--c-msft);">+40.5%</div>
-        <div class="m-lbl">Microsoft (PR Velocity)</div>
-        <div class="m-sub">Study of 16,000+ engineers</div>
+        <div class="m-lbl">Microsoft (PRs, High vs Zero Use)</div>
+        <div class="m-sub">16,223 engineers, 2025 · preprint</div>
       </div>
       <div class="m-card" style="border-top: 3px solid var(--c-stripe);">
-        <div class="m-val" style="color:var(--c-stripe);">1,300</div>
-        <div class="m-lbl">Stripe (PRs/Week Landed)</div>
-        <div class="m-sub">Autonomous multi-agent Minions</div>
+        <div class="m-val" style="color:var(--c-stripe);">&gt;1,000</div>
+        <div class="m-lbl">Stripe (Merged PRs/Week)</div>
+        <div class="m-sub">Fully Minion-produced (Stripe blog)</div>
       </div>
     </div>
   </section>
@@ -350,268 +382,208 @@
   <!-- ================= 2. MULTI-YEAR TRAJECTORY ================= -->
   <section class="section-card" id="trajectory">
     <div class="section-kicker">Multi-Year Trajectory (2024–2026)</div>
-    <h2>Internal AI Adoption vs. Engineering Output Gains</h2>
-    <p class="lead">Connected multi-year curves plotting internal developer AI adoption against measurable output gains.</p>
+    <h2>Disclosed AI Share of Code, Over Time</h2>
+    <p class="lead">Every point is a figure a company actually stated, plotted on the date it applied. Only one thing is plotted: how much code AI writes. Output effects use incompatible units (PRs, developer-years, minutes), so they are listed in the Case Study Matrix below, not forced onto a shared axis.</p>
 
     <!-- Filters -->
     <div class="control-row">
-      <div style="display:flex; align-items:center; gap:6px;">
+      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
         <span style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Year:</span>
-        <button class="btn-pill active" onclick="filterYear('all')">All (2024–2026)</button>
-        <button class="btn-pill" onclick="filterYear('2024')">2024 (Pilot)</button>
-        <button class="btn-pill" onclick="filterYear('2025')">2025 (Expansion)</button>
-        <button class="btn-pill" onclick="filterYear('2026')">2026 (Agentic)</button>
+        <button class="btn-pill active" data-year="all" onclick="filterYear('all')">All (2024–2026)</button>
+        <button class="btn-pill" data-year="2024" onclick="filterYear('2024')">2024</button>
+        <button class="btn-pill" data-year="2025" onclick="filterYear('2025')">2025</button>
+        <button class="btn-pill" data-year="2026" onclick="filterYear('2026')">2026</button>
       </div>
-      <div style="display:flex; align-items:center; gap:6px;">
+      <div class="company-filters" id="companyFilters">
         <span style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Company:</span>
-        <button class="btn-pill active" onclick="filterCompany('all')">All</button>
-        <button class="btn-pill" onclick="filterCompany('Google')">Google</button>
-        <button class="btn-pill" onclick="filterCompany('Microsoft')">Microsoft</button>
-        <button class="btn-pill" onclick="filterCompany('Amazon')">Amazon</button>
-        <button class="btn-pill" onclick="filterCompany('Stripe')">Stripe</button>
+        <button class="btn-pill active" data-company="all" onclick="filterCompany('all')">All</button>
       </div>
+    </div>
+
+    <div class="verify-key">
+      <span><i class="key-solid"></i><strong>Solid node</strong> = verified corporate disclosure (primary source)</span>
+      <span><i class="key-dashed"></i><strong>Dashed node</strong> = management target, or a claim known only from media reports</span>
+      <span><i class="key-range"></i><strong>Bar</strong> = company gave a range</span>
     </div>
 
     <!-- Live Inspection Box -->
     <div class="inspect-bar">
       <div>
-        <div class="insp-title" id="inspTitle">Hover Any Data Point to Inspect</div>
-        <div class="insp-desc" id="inspSubtitle">Disclosed telemetry and output gains</div>
+        <div class="insp-title" id="inspTitle">Hover or tap any point to inspect</div>
+        <div class="insp-desc" id="inspSubtitle">Quote, definition and source for each figure</div>
       </div>
       <div class="insp-stats">
         <div>
-          <div class="insp-lbl">Tool</div>
+          <div class="insp-lbl">Metric</div>
           <div class="insp-val" id="inspTool">—</div>
         </div>
         <div>
-          <div class="insp-lbl">Adoption / Code Share</div>
+          <div class="insp-lbl">Value</div>
           <div class="insp-val" id="inspAdoption">—</div>
         </div>
         <div>
-          <div class="insp-lbl">Output &amp; Velocity Gain</div>
+          <div class="insp-lbl">Source</div>
           <div class="insp-val" id="inspOutput">—</div>
         </div>
       </div>
     </div>
+    <div class="quote-line" id="inspQuote"></div>
 
-    <!-- Chart Canvas -->
-    <div class="chart-box">
-      <svg id="mainSvg" viewBox="0 0 920 440" width="100%">
-        <defs>
-          <marker id="arr-google" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--c-google)" /></marker>
-          <marker id="arr-msft" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--c-msft)" /></marker>
-          <marker id="arr-amazon" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--c-amazon)" /></marker>
-          <marker id="arr-stripe" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--c-stripe)" /></marker>
-          <marker id="arr-meta" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--c-meta)" /></marker>
-          <marker id="arr-klarna" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--c-klarna)" /></marker>
-        </defs>
-
-        <!-- Horizontal grid (Output Uplift: 0% to 100%) -->
-        <line x1="80" y1="380" x2="880" y2="380" class="axis-line" />
-        <text x="70" y="384" text-anchor="end" class="tick-text">0%</text>
-        <line x1="80" y1="295" x2="880" y2="295" class="grid-dash" />
-        <text x="70" y="299" text-anchor="end" class="tick-text">+25%</text>
-        <line x1="80" y1="210" x2="880" y2="210" class="grid-dash" />
-        <text x="70" y="214" text-anchor="end" class="tick-text">+50%</text>
-        <line x1="80" y1="125" x2="880" y2="125" class="grid-dash" />
-        <text x="70" y="129" text-anchor="end" class="tick-text">+75%</text>
-        <line x1="80" y1="40" x2="880" y2="40" class="grid-dash" />
-        <text x="70" y="44" text-anchor="end" class="tick-text">+100%</text>
-
-        <!-- Vertical grid (Internal AI Adoption: 0% to 100%) -->
-        <line x1="80" y1="40" x2="80" y2="380" class="axis-line" />
-        <text x="80" y="405" text-anchor="middle" class="tick-text">0%</text>
-        <line x1="280" y1="40" x2="280" y2="380" class="grid-dash" />
-        <text x="280" y="405" text-anchor="middle" class="tick-text">25% AI Adoption</text>
-        <line x1="480" y1="40" x2="480" y2="380" class="grid-dash" />
-        <text x="480" y="405" text-anchor="middle" class="tick-text">50% AI Adoption</text>
-        <line x1="680" y1="40" x2="680" y2="380" class="grid-dash" />
-        <text x="680" y="405" text-anchor="middle" class="tick-text">75% AI Adoption</text>
-        <line x1="880" y1="40" x2="880" y2="380" class="axis-line" />
-        <text x="880" y="405" text-anchor="middle" class="tick-text">100%</text>
-
-        <!-- Axis Labels -->
-        <text x="24" y="210" text-anchor="middle" transform="rotate(-90 24 210)" class="axis-title">Workforce Output &amp; Velocity Gain (%)</text>
-        <text x="480" y="430" text-anchor="middle" class="axis-title">Internal Developer AI Adoption / Code Share (%)</text>
-
-        <!-- Google -->
-        <g id="grp-google" class="company-plot" data-company="Google">
-          <line x1="280" y1="312" x2="480" y2="244" stroke="var(--c-google)" stroke-width="2.5" opacity="0.6" marker-end="url(#arr-google)" class="path-line" />
-          <line x1="480" y1="244" x2="680" y2="159" stroke="var(--c-google)" stroke-width="3.5" opacity="0.85" marker-end="url(#arr-google)" class="path-line" />
-          <g class="dot-node yr-2024" onmouseover="showDevStat('Google', '2024', 'Goose (Gemini)', '25% of new code', '+20% velocity uplift')">
-            <circle cx="280" cy="312" r="8" fill="var(--c-google)" opacity="0.75"/><text x="280" y="312" class="year-text">'24</text>
-          </g>
-          <g class="dot-node yr-2025" onmouseover="showDevStat('Google', '2025', 'Goose (Gemini)', '50% of new code', '+40% velocity uplift')">
-            <circle cx="480" cy="244" r="10" fill="var(--c-google)" opacity="0.85"/><text x="480" y="244" class="year-text">'25</text>
-          </g>
-          <g class="dot-node yr-2026" onmouseover="showDevStat('Google', '2026', 'Goose Code Agents', '~75% of new code', '+65% velocity | -35% cycle time')">
-            <circle cx="680" cy="159" r="14" fill="var(--c-google)" opacity="0.95"/><text x="680" y="159" class="year-text" font-size="11px">'26</text>
-          </g>
-        </g>
-
-        <!-- Microsoft -->
-        <g id="grp-msft" class="company-plot" data-company="Microsoft">
-          <line x1="320" y1="242" x2="600" y2="193" stroke="var(--c-msft)" stroke-width="2.5" opacity="0.6" marker-end="url(#arr-msft)" class="path-line" />
-          <line x1="600" y1="193" x2="816" y2="125" stroke="var(--c-msft)" stroke-width="3.5" opacity="0.85" marker-end="url(#arr-msft)" class="path-line" />
-          <g class="dot-node yr-2024" onmouseover="showDevStat('Microsoft', '2024', 'GitHub Copilot', '30% adoption (16k devs)', '+40.5% PRs | 55% faster tasks')">
-            <circle cx="320" cy="242" r="8" fill="var(--c-msft)" opacity="0.75"/><text x="320" y="242" class="year-text">'24</text>
-          </g>
-          <g class="dot-node yr-2025" onmouseover="showDevStat('Microsoft', '2025', 'Copilot Workspace', '65% adoption', '+55% task speed | -62% security fix time')">
-            <circle cx="600" cy="193" r="10" fill="var(--c-msft)" opacity="0.85"/><text x="600" y="193" class="year-text">'25</text>
-          </g>
-          <g class="dot-node yr-2026" onmouseover="showDevStat('Microsoft', '2026', 'Copilot Multi-Agent', '92% adoption', '+75% velocity across Cloud+AI')">
-            <circle cx="816" cy="125" r="14" fill="var(--c-msft)" opacity="0.95"/><text x="816" y="125" class="year-text" font-size="11px">'26</text>
-          </g>
-        </g>
-
-        <!-- Amazon -->
-        <g id="grp-amazon" class="company-plot" data-company="Amazon">
-          <line x1="240" y1="295" x2="560" y2="74" stroke="var(--c-amazon)" stroke-width="3" opacity="0.75" marker-end="url(#arr-amazon)" class="path-line" />
-          <line x1="560" y1="74" x2="720" y2="57" stroke="var(--c-amazon)" stroke-width="3" opacity="0.85" marker-end="url(#arr-amazon)" class="path-line" />
-          <g class="dot-node yr-2024" onmouseover="showDevStat('Amazon', '2024', 'Amazon Q Pilot', '20% adoption', '50-day upgrades cut to hours')">
-            <circle cx="240" cy="295" r="7" fill="var(--c-amazon)" opacity="0.7"/><text x="240" y="295" class="year-text">'24</text>
-          </g>
-          <g class="dot-node yr-2025" onmouseover="showDevStat('Amazon', '2025', 'Amazon Q Developer', '60% Java apps', '4,500 dev-years saved | 79% accepted | $260M')">
-            <circle cx="560" cy="74" r="13" fill="var(--c-amazon)" opacity="0.95"/><text x="560" y="74" class="year-text" font-size="11px">'25</text>
-          </g>
-          <g class="dot-node yr-2026" onmouseover="showDevStat('Amazon', '2026', 'Amazon Q Enterprise', '80% adoption', '&gt;50% Java modernized | 95% time reduction')">
-            <circle cx="720" cy="57" r="14" fill="var(--c-amazon)" opacity="0.95"/><text x="720" y="57" class="year-text" font-size="11px">'26</text>
-          </g>
-        </g>
-
-        <!-- Stripe -->
-        <g id="grp-stripe" class="company-plot" data-company="Stripe">
-          <line x1="360" y1="278" x2="680" y2="142" stroke="var(--c-stripe)" stroke-width="3" opacity="0.8" marker-end="url(#arr-stripe)" class="path-line" />
-          <g class="dot-node yr-2025" onmouseover="showDevStat('Stripe', '2025', 'Minions (Slack)', '35% workflow adoption', '500 autonomous PRs/week landed')">
-            <circle cx="360" cy="278" r="8" fill="var(--c-stripe)" opacity="0.75"/><text x="360" y="278" class="year-text">'25</text>
-          </g>
-          <g class="dot-node yr-2026" onmouseover="showDevStat('Stripe', '2026', 'Minions Multi-Agent', '75% workflow adoption', '1,300 autonomous PRs/week landed')">
-            <circle cx="680" cy="142" r="13" fill="var(--c-stripe)" opacity="0.95"/><text x="680" y="142" class="year-text" font-size="11px">'26</text>
-          </g>
-        </g>
-
-        <!-- Meta -->
-        <g id="grp-meta" class="company-plot" data-company="Meta">
-          <line x1="240" y1="329" x2="400" y2="261" stroke="var(--c-meta)" stroke-width="2.5" opacity="0.6" marker-end="url(#arr-meta)" class="path-line" />
-          <line x1="400" y1="261" x2="600" y2="176" stroke="var(--c-meta)" stroke-width="3" opacity="0.8" marker-end="url(#arr-meta)" class="path-line" />
-          <g class="dot-node yr-2024" onmouseover="showDevStat('Meta', '2024', 'Code Llama Pilot', '20% suggestion acceptance', '+15% developer velocity')">
-            <circle cx="240" cy="329" r="7" fill="var(--c-meta)" opacity="0.7"/><text x="240" y="329" class="year-text">'24</text>
-          </g>
-          <g class="dot-node yr-2025" onmouseover="showDevStat('Meta', '2025', 'MetaCode Assistant', '40% code assisted', '+35% task velocity')">
-            <circle cx="400" cy="261" r="9" fill="var(--c-meta)" opacity="0.8"/><text x="400" y="261" class="year-text">'25</text>
-          </g>
-          <g class="dot-node yr-2026" onmouseover="showDevStat('Meta', '2026', 'Coding Agents', '65% AI code target', '50-75% target | Autonomous bug fixing')">
-            <circle cx="600" cy="176" r="13" fill="var(--c-meta)" opacity="0.95"/><text x="600" y="176" class="year-text" font-size="11px">'26</text>
-          </g>
-        </g>
-
-        <!-- Klarna -->
-        <g id="grp-klarna" class="company-plot" data-company="Klarna">
-          <line x1="600" y1="101" x2="720" y2="91" stroke="var(--c-klarna)" stroke-width="2.5" opacity="0.7" marker-end="url(#arr-klarna)" class="path-line" />
-          <line x1="720" y1="91" x2="680" y2="108" stroke="var(--c-klarna)" stroke-width="2.5" opacity="0.7" marker-end="url(#arr-klarna)" class="path-line" />
-          <g class="dot-node yr-2024" onmouseover="showDevStat('Klarna', '2024', 'OpenAI Assistant', '65% chat volume', '700 FTE equivalent | Resolution 11m &rarr; 2m')">
-            <circle cx="600" cy="101" r="10" fill="var(--c-klarna)" opacity="0.8"/><text x="600" y="101" class="year-text">'24</text>
-          </g>
-          <g class="dot-node yr-2025" onmouseover="showDevStat('Klarna', '2025', 'AI Assistant Expansion', '80% chat volume', '853 FTE equivalent | $60M annual savings')">
-            <circle cx="720" cy="91" r="12" fill="var(--c-klarna)" opacity="0.9"/><text x="720" y="91" class="year-text">'25</text>
-          </g>
-          <g class="dot-node yr-2026" onmouseover="showDevStat('Klarna', '2026', 'Hybrid Human-AI', '75% chat volume', 'Rebalanced for complex edge cases')">
-            <circle cx="680" cy="108" r="11" fill="var(--c-klarna)" opacity="0.9"/><text x="680" y="108" class="year-text">'26</text>
-          </g>
-        </g>
-      </svg>
+    <div class="chart-box" style="overflow-x:auto;">
+      <svg id="mainSvg" viewBox="0 0 920 450" width="100%" style="min-width:640px;" role="img" aria-label="Disclosed AI share of code by company, 2024 to 2026"></svg>
     </div>
+    <p class="chart-note">Denominators differ: Google, Zeta and Compass report share of <em>new</em> code; N-able and FactSet report <em>committed</em> code (FactSet: adopting teams only); Cognizant switched from AI-<em>generated</em> (2025) to AI-<em>assisted</em> (2026); Shopify's figure is the share of <em>merged PRs</em> co-authored by its agent. Google's 50% point is the "last fall" baseline the CEO restated in April 2026; its exact date is approximate.</p>
+    <p class="chart-note"><strong>Not plotted (no code-share disclosure):</strong> Amazon, Stripe, Klarna, Accenture, MercadoLibre. Their verified output metrics are in the Case Study Matrix.</p>
 
-    <!-- Legends Grid -->
-    <div class="legend-grid">
-      <div class="legend-pill" onclick="filterCompany('Google')">
-        <div class="legend-head"><span class="dot" style="background:var(--c-google)"></span>Google (Goose)</div>
-        <div class="legend-stat" style="color:var(--c-google)">25% &rarr; 75% AI Code</div>
-      </div>
-      <div class="legend-pill" onclick="filterCompany('Microsoft')">
-        <div class="legend-head"><span class="dot" style="background:var(--c-msft)"></span>Microsoft (Copilot)</div>
-        <div class="legend-stat" style="color:var(--c-msft)">+40.5% PRs | 55% Faster</div>
-      </div>
-      <div class="legend-pill" onclick="filterCompany('Amazon')">
-        <div class="legend-head"><span class="dot" style="background:var(--c-amazon)"></span>Amazon (Amazon Q)</div>
-        <div class="legend-stat" style="color:var(--c-amazon)">4,500 Dev-Years Saved</div>
-      </div>
-      <div class="legend-pill" onclick="filterCompany('Stripe')">
-        <div class="legend-head"><span class="dot" style="background:var(--c-stripe)"></span>Stripe (Minions)</div>
-        <div class="legend-stat" style="color:var(--c-stripe)">1,300 PRs / Wk Landed</div>
-      </div>
-      <div class="legend-pill" onclick="filterCompany('Meta')">
-        <div class="legend-head"><span class="dot" style="background:var(--c-meta)"></span>Meta (MetaCode)</div>
-        <div class="legend-stat" style="color:var(--c-meta)">50%–75% Target Code</div>
-      </div>
-      <div class="legend-pill" onclick="filterCompany('Klarna')">
-        <div class="legend-head"><span class="dot" style="background:var(--c-klarna)"></span>Klarna (OpenAI)</div>
-        <div class="legend-stat" style="color:var(--c-klarna)">853 FTE Workload</div>
-      </div>
-    </div>
+    <div class="legend-grid" id="legendGrid"></div>
   </section>
 
   <!-- ================= 3. COMPANY TELEMETRY ================= -->
   <section class="section-card" id="telemetry">
-    <div class="section-kicker">Empirical Benchmarks</div>
+    <div class="section-kicker">Empirical Benchmarks · Case Study Matrix</div>
     <h2>Documented Corporate Telemetry</h2>
-    <p class="lead">Disclosed metrics from earnings calls, shareholder updates, and published empirical studies.</p>
+    <p class="lead">Disclosed metrics from earnings calls, shareholder updates, engineering blogs, and published empirical studies. <span class="badge badge-verified">Verified</span> = primary-source disclosure · <span class="badge badge-target">Target / Unverified</span> = forward-looking or not in a primary source.</p>
 
+    <div class="table-scroll">
     <table>
       <thead>
         <tr>
           <th>Company</th>
           <th>Internal Tool</th>
-          <th>Internal Adoption</th>
+          <th>Adoption / Code Share</th>
           <th>Primary Output Metric</th>
           <th>Disclosed Real-World Impact</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="dot" style="background:var(--c-google)"></span><strong>Google</strong></td>
-          <td>Goose (Gemini Internal)</td>
-          <td>&gt;90% of engineers</td>
+          <td><span class="dot" style="background:var(--c-google)"></span> <strong>Google</strong></td>
+          <td>Internal AI coding tools (incl. Goose, per leaked docs)</td>
+          <td><strong>&gt;25% (Oct 2024) &rarr; 50% (fall 2025) &rarr; 75% (Apr 2026)</strong> of new code <span class="badge badge-verified">Verified</span></td>
           <td>% New Code Generated</td>
-          <td>Rose from <strong>25% (2024)</strong> to <strong>75% (2026)</strong>; cycle times down 35%.</td>
+          <td>No org-wide cycle-time metric. One anecdote: a complex migration completed 6x faster than a year earlier.</td>
         </tr>
         <tr>
-          <td><span class="dot" style="background:var(--c-msft)"></span><strong>Microsoft</strong></td>
+          <td><span class="dot" style="background:var(--c-msft)"></span> <strong>Microsoft</strong></td>
           <td>GitHub Copilot</td>
-          <td>16,000+ Cloud+AI devs</td>
+          <td>16,223 Cloud+AI engineers (Feb–Dec 2025). CEO: "maybe 20 to 30 percent" of repo code AI-written <span class="badge badge-target">Media-reported</span></td>
           <td>PR Throughput &amp; Speed</td>
-          <td><strong>+40.5% more completed PRs</strong>; tasks <strong>55% faster</strong>; fixes 62% faster.</td>
+          <td><strong>+40.5% PRs</strong> in highest- vs zero-usage weeks (observational preprint) <span class="badge badge-verified">Verified</span>. Separate 2022 RCT of 95 recruited developers (not Microsoft staff): one task <strong>55.8% faster</strong>.</td>
         </tr>
         <tr>
-          <td><span class="dot" style="background:var(--c-amazon)"></span><strong>Amazon</strong></td>
+          <td><span class="dot" style="background:var(--c-amazon)"></span> <strong>Amazon</strong></td>
           <td>Amazon Q Developer</td>
-          <td>30,000+ production apps</td>
+          <td>&gt;50% of production Java systems upgraded in &lt;6 months (2024)</td>
           <td>Engineering Time Saved</td>
-          <td><strong>4,500 developer-years saved</strong>; app upgrades cut from 50 days to hours (79% accepted as-is).</td>
+          <td><strong>4,500 developer-years saved</strong> (company estimate); Java 17 upgrades ~50 dev-days &rarr; a few hours; 79% of auto-generated code reviews shipped without changes; $260M annualized gains <span class="badge badge-verified">Verified</span></td>
         </tr>
         <tr>
-          <td><span class="dot" style="background:var(--c-stripe)"></span><strong>Stripe</strong></td>
-          <td>Minions (Multi-Agent)</td>
-          <td>Engineering-wide (Slack)</td>
-          <td>Autonomous PRs Landed</td>
-          <td>Lands <strong>~1,300 pull requests/week</strong> autonomously with human sign-off.</td>
+          <td><span class="dot" style="background:var(--c-stripe)"></span> <strong>Stripe</strong></td>
+          <td>Minions (one-shot agents)</td>
+          <td>Not disclosed</td>
+          <td>Merged Agent PRs</td>
+          <td><strong>&gt;1,000 merged PRs/week</strong> fully Minion-produced, human-reviewed <span class="badge badge-verified">Verified</span></td>
         </tr>
         <tr>
-          <td><span class="dot" style="background:var(--c-meta)"></span><strong>Meta</strong></td>
-          <td>MetaCode &amp; Llama Agents</td>
-          <td>Monorepo engineering</td>
-          <td>Autonomous Agent Code</td>
-          <td>Targeting <strong>50%–75% AI code</strong>; agents write tests and fix bugs.</td>
+          <td><span class="dot" style="background:var(--c-meta)"></span> <strong>Meta</strong></td>
+          <td>Not disclosed</td>
+          <td>Not disclosed</td>
+          <td>AI Code Targets</td>
+          <td>CEO projected <strong>~half of development</strong> by AI within a year (Apr 2025); creation org targets 65% of engineers writing <strong>&gt;75%</strong> of committed code with AI (H1 2026, leaked doc) <span class="badge badge-target">Target</span></td>
         </tr>
         <tr>
-          <td><span class="dot" style="background:var(--c-klarna)"></span><strong>Klarna</strong></td>
-          <td>OpenAI Enterprise</td>
-          <td>Support operations</td>
+          <td><span class="dot" style="background:var(--c-klarna)"></span> <strong>Klarna</strong></td>
+          <td>OpenAI Assistant</td>
+          <td>Support operations (not engineering)</td>
           <td>Workforce Resolution</td>
-          <td>Handled workload of <strong>853 FTEs</strong>; resolution dropped from 11m to &lt;2m.</td>
+          <td>Work of <strong>700 FTEs</strong>; resolution 11m &rarr; &lt;2m (Feb 2024) <span class="badge badge-verified">Verified</span>. 853 FTEs / $60M saved (Q3 2025) <span class="badge badge-target">Media-reported</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:var(--c-expansion)"></span> <strong>FactSet</strong></td>
+          <td>Coding agents</td>
+          <td><strong>27%</strong> of committed code (adopting teams only)</td>
+          <td>Committed Code Share</td>
+          <td>Coding token use 5x QoQ; AI-written committed lines ~10x; ~10% tech workforce reduction <span class="badge badge-verified">Verified</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:var(--c-expansion)"></span> <strong>Zeta Global</strong></td>
+          <td>Spade (internal workflow tool)</td>
+          <td><strong>75% (Q1) &rarr; 89.6% (Q2 2026)</strong> of new code</td>
+          <td>New Code Share</td>
+          <td>Added engineers in Q2; internal AI cost "well under 1% of revenue". No throughput or cycle-time metric <span class="badge badge-verified">Verified</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:var(--c-expansion)"></span> <strong>Compass</strong></td>
+          <td>AI coding tools</td>
+          <td><strong>30–40% (Q1) &rarr; 50–60% (Q2 2026)</strong> of new code</td>
+          <td>Product Dev Velocity</td>
+          <td><strong>+20% product development velocity</strong> with tech OpEx unchanged (Q1 2026) <span class="badge badge-verified">Verified</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:var(--c-expansion)"></span> <strong>N-able</strong></td>
+          <td>AI coding tools</td>
+          <td><strong>47%</strong> of committed code (Q2 2026)</td>
+          <td>Committed Code Share</td>
+          <td>"Some features" 10–12x faster than roadmap estimates (anecdotal); ~6% total headcount reduction <span class="badge badge-verified">Verified</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:var(--c-expansion)"></span> <strong>Cognizant</strong></td>
+          <td>Claude, Gemini, Copilot, Devin, Codex</td>
+          <td><strong>~30% (Q3 2025) &rarr; &gt;40% (Q2 2026)</strong></td>
+          <td>Internal Code Share</td>
+          <td>Definition shifted from AI-generated to AI-assisted. 50% "in the years ahead" <span class="badge badge-target">Target</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:var(--c-expansion)"></span> <strong>Accenture</strong></td>
+          <td>GitHub Copilot (RCT)</td>
+          <td>&gt;80% of participants adopted</td>
+          <td>PRs, Merge Rate, Builds</td>
+          <td><strong>+8.69% PRs</strong>; +15% merge rate; +84% successful builds (vendor-published; independent re-analysis finds effects not significant) <span class="badge badge-verified">Verified</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:var(--c-expansion)"></span> <strong>MercadoLibre</strong></td>
+          <td>GitHub Copilot</td>
+          <td>9,000+ of 10,000+ developers</td>
+          <td>Time Writing Code</td>
+          <td><strong>~50% less time writing code</strong> (GitHub vendor case study, undated) <span class="badge badge-verified">Verified</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:var(--c-expansion)"></span> <strong>Shopify</strong></td>
+          <td>River (Slack agent)</td>
+          <td><strong>1 in 8</strong> merged PRs co-authored</td>
+          <td>Merged Agent PRs</td>
+          <td><strong>3,536</strong> River-co-authored PRs merged in 30 days; 7,000+ people used it <span class="badge badge-verified">Verified</span></td>
         </tr>
       </tbody>
     </table>
+    </div>
+  </section>
+
+  <!-- ================= 3b. TELEMETRY GAP ================= -->
+  <section class="section-card" id="gap">
+    <div class="section-kicker">The Telemetry Gap</div>
+    <h2>Silence Is the Signal</h2>
+    <p class="lead">Non-disclosure is a finding, not missing data. Companies spend hundreds of billions on AI compute, yet almost none publish an <em>organisational</em> shipping metric (cycle time, lead time, delivery throughput) tied to internal developer AI.</p>
+
+    <div class="callout">
+      <strong>What the evidence shows:</strong> Most disclosures are <em>input-side</em> metrics: the share of code written by AI. Output-side numbers are rarer (Microsoft +40.5% PRs, Accenture +8.69% PRs, Compass +20% product velocity, Amazon's developer-years, Stripe and Shopify PR counts), and none is an end-to-end delivery metric such as lead time or deployment frequency. A secondary review of 63 earnings calls found 21 companies reporting an AI code share and <strong>zero</strong> tying AI to deployment frequency, MTTR, lead time or change-failure rate (<a class="ref-link" href="https://www.port.io/blog/63-earnings-calls-0-engineering-outcomes-tied-to-ai" target="_blank">Port, Mar 2026</a>, vendor analysis).<br><br>
+      <strong>Working hypothesis (not a disclosed metric):</strong> Because human code review is the bottleneck, end-to-end organisational shipping gains likely sit around <strong>5%–15%</strong>, far below code-share headlines. That would explain why most large tech companies keep internal developer telemetry private. It is an analyst estimate, not a verified figure.
+    </div>
+
+    <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>What is public</th><th>Internal engineering output metric?</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Apple</strong></td><td>No AI-code or developer-productivity disclosure found</td><td>None</td><td><span class="badge badge-gap">Telemetry gap</span></td></tr>
+        <tr><td><strong>Netflix</strong></td><td>AI use in content production ("over 300 titles", <a class="ref-link" href="https://ground.news/article/netflix-says-it-has-used-ai-in-over-300-titles-and-theres-no-stopping-it-now" target="_blank">media</a>); nothing on engineering</td><td>None</td><td><span class="badge badge-gap">Telemetry gap</span></td></tr>
+        <tr><td><strong>Salesforce</strong></td><td>CEO told Bloomberg AI "is doing 30% to 50% of the work at Salesforce now" (<a class="ref-link" href="https://foxbusiness.com/technology/salesforce-boss-reveals-stunning-amount-work-now-handled-ai" target="_blank">Fox Business</a>); not an engineering output metric</td><td>None</td><td><span class="badge badge-target">Unverified claim</span></td></tr>
+        <tr><td><strong>Cisco</strong></td><td>Executive AI-coding targets appear only in trade-press interviews (not independently verifiable here). No primary-source filing, transcript or engineering blog metric found</td><td>None</td><td><span class="badge badge-gap">Telemetry gap</span></td></tr>
+        <tr><td><strong>GitLab</strong></td><td>Q1 FY27 prepared remarks cite <em>customer</em> metrics only (e.g. Zillow ships 40% more code per engineer)</td><td>None for GitLab's own R&amp;D</td><td><span class="badge badge-gap">Telemetry gap</span></td></tr>
+      </tbody>
+    </table>
+    </div>
   </section>
 
   <!-- ================= 4. WORKFLOW SHIFTS ================= -->
@@ -627,7 +599,7 @@
           <span class="info-tag">Constraint</span>
         </div>
         <div class="info-text">
-          Writing 500 lines takes an AI agent 10 seconds, but reviewing 500 lines still takes an engineer 25 minutes. High-adoption teams face review queues unless testing is automated.
+          Faros AI telemetry from 10,000 developers (as summarised by Port, both vendors) found PRs merged up 98% but PR review time up 91% and PR size up 154%, with organisational delivery velocity flat. More code does not mean faster shipping if review does not scale.
         </div>
       </div>
 
@@ -637,7 +609,7 @@
           <span class="info-tag">Highest ROI</span>
         </div>
         <div class="info-text">
-          The single highest return is refactoring technical debt. Upgrading Java frameworks across Amazon saved 4,500 developer-years because existing test suites gave AI immediate feedback.
+          Amazon's largest disclosed gain came from mechanical upgrade work: Java 17 upgrades fell from ~50 developer-days to a few hours, an estimated 4,500 developer-years saved. Our interpretation (not Amazon's claim): well-specified, testable upgrade work is where AI output is easiest to verify.
         </div>
       </div>
 
@@ -647,17 +619,17 @@
           <span class="info-tag">Agentic Leap</span>
         </div>
         <div class="info-text">
-          Moving from passive IDE autocomplete to asynchronous background agents (like Stripe Minions) generates ~1,300 landed PRs/week without engineers waiting on completions.
+          Moving from passive IDE autocomplete to asynchronous background agents (like Stripe Minions) yields &gt;1,000 merged PRs/week at Stripe without engineers waiting on completions.
         </div>
       </div>
 
       <div class="info-card">
         <div class="info-head">
-          <span class="info-title">4. Seniority Equalizer</span>
-          <span class="info-tag">Workforce Impact</span>
+          <span class="info-title">4. Who Benefits Most?</span>
+          <span class="info-tag">Unquantified</span>
         </div>
         <div class="info-text">
-          Junior and mid-level developers gain +50% to +80% velocity, removing boilerplate and syntax hurdles to close the throughput gap with senior architects.
+          The 2022 Copilot RCT reports heterogeneous effects that "show promise for AI pair programmers to help people transition into software development careers." No primary source in this dataset quantifies a seniority gap, so we give no number.
         </div>
       </div>
     </div>
@@ -702,7 +674,7 @@
           <span class="info-title">Engineers as System Architects</span>
         </div>
         <div class="info-text">
-          As AI drafts 75% of raw syntax, human engineers shift to curating specifications, evaluating security, and verifying system architecture.
+          As AI drafts a growing share of raw syntax (25%&ndash;90% where disclosed), human engineers shift to curating specifications, evaluating security, and verifying system architecture.
         </div>
       </div>
     </div>
@@ -712,8 +684,9 @@
   <section class="section-card" id="references">
     <div class="section-kicker">Empirical Validation</div>
     <h2>Verified Sources &amp; Public Disclosures</h2>
-    <p class="lead">Every metric in this briefing is backed by official corporate disclosures, earnings reports, or peer-reviewed studies.</p>
+    <p class="lead">Every solid-node metric is backed by an official corporate disclosure, earnings call transcript, engineering blog, or research study. All links were tested and returned HTTP 200 on 2026-10-12. Targets and media reports are badged separately.</p>
 
+    <div class="table-scroll">
     <table>
       <thead>
         <tr>
@@ -729,78 +702,89 @@
           <td><strong>Google</strong></td>
           <td>Alphabet Q3 2024 Earnings Call<br><span style="color:var(--text-muted); font-size:11px;">Sundar Pichai, CEO</span></td>
           <td class="mono">2024-10-29</td>
-          <td><span class="badge badge-verified">Official Blog</span></td>
+          <td><span class="badge badge-verified">Earnings Remarks</span></td>
           <td>
-            <strong>&gt;25% of all new internal code AI-generated.</strong>
+            <strong>&gt;25% of all new code AI-generated.</strong>
             <div class="source-quote">"Today, more than a quarter of all new code at Google is generated by AI, then reviewed and accepted by engineers."</div>
             <a class="ref-link" href="https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2024/" target="_blank">blog.google/alphabet-earnings-q3-2024/ &rarr;</a>
           </td>
         </tr>
         <tr>
           <td><strong>Google</strong></td>
-          <td>Google Internal "Goose" AI Coding Model<br><span style="color:var(--text-muted); font-size:11px;">Business Insider Engineering Report</span></td>
+          <td>Cloud Next 2026 Remarks<br><span style="color:var(--text-muted); font-size:11px;">Sundar Pichai, CEO</span></td>
+          <td class="mono">2026-04-22</td>
+          <td><span class="badge badge-verified">Official Blog</span></td>
+          <td>
+            <strong>75% of new code AI-generated (up from 50% in fall 2025).</strong>
+            <div class="source-quote">"Today, 75% of all new code at Google is now AI-generated and approved by engineers, up from 50% last fall." … "a particularly complex code migration done by agents and engineers working together was completed six times faster than was possible a year ago with engineers alone."</div>
+            <a class="ref-link" href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/cloud-next-2026-sundar-pichai/" target="_blank">blog.google/cloud-next-2026-sundar-pichai/ &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Google</strong></td>
+          <td>Google Internal "Goose" AI Coding Model<br><span style="color:var(--text-muted); font-size:11px;">Business Insider, from leaked internal documents</span></td>
           <td class="mono">2024-02-15</td>
           <td><span class="badge badge-reported">Investigative Report</span></td>
           <td>
-            <strong>Goose trained on 25 years of Google code for internal engineering.</strong>
-            <div class="source-quote">Leaked internal documents show Goose was trained on internal engineering expertise with a 28k context window to automate coding across Google infrastructure.</div>
+            <strong>Internal coding model, "descendant of Gemini", 28k-token context.</strong>
+            <div class="source-quote">Goose is "trained on the sum total of 25 years of engineering expertise at Google" … "Goose has a 28k token context window" (quoting internal documents).</div>
             <a class="ref-link" href="https://www.businessinsider.com/google-goose-ai-model-language-ai-coding-2024-2" target="_blank">businessinsider.com/google-goose-ai-coding-2024-2 &rarr;</a>
           </td>
         </tr>
         <tr>
           <td><strong>Microsoft</strong></td>
-          <td>Empirical Observational Dose-Response Study<br><span style="color:var(--text-muted); font-size:11px;">arXiv:2606.00438</span></td>
-          <td class="mono">2026-06-01</td>
-          <td><span class="badge badge-verified">Peer-Reviewed</span></td>
+          <td>Observational Dose-Response Study<br><span style="color:var(--text-muted); font-size:11px;">arXiv:2606.00438 · Heilman, Kyllo, Murphy-Hill (Microsoft)</span></td>
+          <td class="mono">2026-05-30</td>
+          <td><span class="badge badge-verified">Preprint (not peer-reviewed)</span></td>
           <td>
-            <strong>+40.5% more completed pull requests per week.</strong>
-            <div class="source-quote">"Engineers completed 40.5% more pull requests during high-usage weeks compared to weeks with zero usage, holding development effort constant."</div>
+            <strong>+40.5% PRs in highest- vs zero-Copilot-usage weeks (16,223 engineers, Feb–Dec 2025).</strong>
+            <div class="source-quote">"Engineers are estimated to complete 40.5% more PRs in their highest GHCP usage weeks relative to their zero-usage weeks, holding measured development effort constant."</div>
             <a class="ref-link" href="https://arxiv.org/abs/2606.00438" target="_blank">arxiv.org/abs/2606.00438 &rarr;</a>
           </td>
         </tr>
         <tr>
           <td><strong>Microsoft / GitHub</strong></td>
-          <td>Quantifying Copilot's Impact on Productivity<br><span style="color:var(--text-muted); font-size:11px;">GitHub Research &amp; arXiv:2302.06590</span></td>
+          <td>Quantifying Copilot's Impact on Productivity<br><span style="color:var(--text-muted); font-size:11px;">GitHub Research (2022-09-07) &amp; arXiv:2302.06590</span></td>
           <td class="mono">2023-02-13</td>
-          <td><span class="badge badge-verified">Empirical Trial</span></td>
+          <td><span class="badge badge-verified">Controlled Trial</span></td>
           <td>
-            <strong>Tasks completed 55.8% faster with Copilot.</strong>
-            <div class="source-quote">Controlled trial by Peng et al. showed developers finished coding tasks in 71 minutes versus 161 minutes (55.8% faster completion speed).</div>
+            <strong>One task (an HTTP server in JavaScript) completed 55.8% faster with Copilot.</strong>
+            <div class="source-quote">95 recruited professional developers (not Microsoft employees): "the developers using GitHub Copilot took on average 1 hour and 11 minutes to complete the task, while the developers who didn't use GitHub Copilot took on average 2 hours and 41 minutes."</div>
             <a class="ref-link" href="https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/" target="_blank">github.blog/copilot-impact-on-productivity/ &rarr;</a> &bull; 
             <a class="ref-link" href="https://arxiv.org/abs/2302.06590" target="_blank">arxiv.org/abs/2302.06590 &rarr;</a>
           </td>
         </tr>
         <tr>
           <td><strong>Amazon</strong></td>
-          <td>Amazon Q Developer $260M Milestone<br><span style="color:var(--text-muted); font-size:11px;">Andy Jassy (CEO) &amp; AWS DevOps Blog</span></td>
-          <td class="mono">2024-08-22</td>
-          <td><span class="badge badge-verified">Official AWS Blog</span></td>
+          <td>Amazon Q Developer Java Upgrades<br><span style="color:var(--text-muted); font-size:11px;">Andy Jassy (CEO) LinkedIn post &amp; AWS DevOps Blog</span></td>
+          <td class="mono">2024-08-22<br>2024-08-01</td>
+          <td><span class="badge badge-verified">CEO Post &amp; AWS Blog</span></td>
           <td>
-            <strong>4,500 developer-years saved; app upgrades cut from 50 days to hours.</strong>
-            <div class="source-quote">"The average time to migrate an application to Java 17 plunged from what's typically 50 developer-days to a few hours... saved us an estimated 4,500 developer-years of work... 79% of auto-generated code reviews shipped without changes."</div>
+            <strong>4,500 developer-years saved; Java 17 upgrades ~50 developer-days &rarr; a few hours.</strong>
+            <div class="source-quote">Jassy: "The average time to upgrade an application to Java 17 plummeted from what's typically 50 developer-days to just a few hours. We estimate this has saved us the equivalent of 4,500 developer-years of work… In under six months, we've been able to upgrade more than 50% of our production Java systems… our developers shipped 79% of the auto-generated code reviews without any additional changes… an estimated $260M in annualized efficiency gains." (The 79% and 50-day figures appear only in Jassy's post, not on the AWS blog.)</div>
+            <a class="ref-link" href="https://www.linkedin.com/posts/andy-jassy-8b1615_one-of-the-most-tedious-but-critical-tasks-activity-7232374162185461760-AdSz/" target="_blank">linkedin.com/posts/andy-jassy (Aug 2024) &rarr;</a> &bull;
             <a class="ref-link" href="https://aws.amazon.com/blogs/devops/amazon-q-developer-just-reached-a-260-million-dollar-milestone/" target="_blank">aws.amazon.com/blogs/amazon-q-developer-260-million-dollar-milestone/ &rarr;</a>
           </td>
         </tr>
         <tr>
           <td><strong>Stripe</strong></td>
-          <td>Minions: One-Shot End-to-End Coding Agents<br><span style="color:var(--text-muted); font-size:11px;">Stripe Developer Blog &amp; InfoQ</span></td>
-          <td class="mono">2026-03-01</td>
+          <td>Minions: One-Shot End-to-End Coding Agents<br><span style="color:var(--text-muted); font-size:11px;">Stripe Developer Blog</span></td>
+          <td class="mono">2026-02-09</td>
           <td><span class="badge badge-verified">Official Engineering</span></td>
           <td>
-            <strong>~1,300 pull requests per week autonomously generated.</strong>
-            <div class="source-quote">"Minions are autonomous coding agents triggered from Slack that spin up devboxes, plan, test, and submit over 1,300 PRs per week containing zero human-written code."</div>
-            <a class="ref-link" href="https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents" target="_blank">stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents &rarr;</a> &bull;
-            <a class="ref-link" href="https://www.infoq.com/news/2026/03/stripe-autonomous-coding-agents/" target="_blank">infoq.com/stripe-autonomous-coding-agents &rarr;</a>
+            <strong>&gt;1,000 merged pull requests per week fully Minion-produced.</strong>
+            <div class="source-quote">"Over a thousand pull requests merged each week at Stripe are completely minion-produced." (InfoQ, 2026-03-20, reports ~1,300/week from Stripe engineers; that secondary figure is not used.)</div>
+            <a class="ref-link" href="https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents" target="_blank">stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents &rarr;</a>
           </td>
         </tr>
         <tr>
           <td><strong>Meta</strong></td>
-          <td>LlamaCon Keynote &amp; Internal Engineering Targets<br><span style="color:var(--text-muted); font-size:11px;">Mark Zuckerberg (CEO) &amp; Livemint</span></td>
-          <td class="mono">2025–2026</td>
-          <td><span class="badge badge-reported">Keynote &amp; Disclosed</span></td>
+          <td>LlamaCon Remarks &amp; Leaked Internal Targets<br><span style="color:var(--text-muted); font-size:11px;">Mark Zuckerberg (via Mashable) &amp; Business Insider (via Livemint)</span></td>
+          <td class="mono">2025-04-29<br>2026-03-27</td>
+          <td><span class="badge badge-target">Target / Media</span></td>
           <td>
-            <strong>Targeting 50% to 75% of engineering code written by AI.</strong>
-            <div class="source-quote">"Within the next year, maybe half the development is going to be done by AI as opposed to people." Internal engineering goals set targets for 65% of engineers writing >75% AI-assisted code.</div>
+            <strong>Targets only: ~half of development by AI within a year; &gt;75% for 65% of creation-org engineers in H1 2026.</strong>
+            <div class="source-quote">Zuckerberg: "our bet is sort of that in the next year... maybe half the development is going to be done by AI as opposed to people" (Mashable notes it is unclear whether he meant Llama or Meta overall). Livemint: the creation org "has set a target for the first half of 2026 for 65% of engineers to write more than 75% of their committed code using AI."</div>
             <a class="ref-link" href="https://mashable.com/article/llamacon-mark-zuckerberg-ai-writes-meta-code" target="_blank">mashable.com/llamacon-mark-zuckerberg-ai-writes-meta-code &rarr;</a> &bull;
             <a class="ref-link" href="https://www.livemint.com/companies/news/mark-zuckerberg-accelerates-metas-ai-native-overhaul-with-strict-ai-coding-targets-for-engineers-report-11774591169815.html" target="_blank">livemint.com/metas-ai-coding-targets &rarr;</a>
           </td>
@@ -812,63 +796,273 @@
           <td><span class="badge badge-verified">Official Press</span></td>
           <td>
             <strong>Handled work of 700 full-time human agents; resolution 11m &rarr; &lt;2m.</strong>
-            <div class="source-quote">"The AI assistant has had 2.3 million conversations, two-thirds of Klarna's customer service chats. It is doing the equivalent work of 700 full-time agents and resolved errands in under 2 minutes compared to 11 minutes."</div>
+            <div class="source-quote">"The AI assistant has had 2.3 million conversations, two-thirds of Klarna's customer service chats. It is doing the equivalent work of 700 full-time agents … Customers now resolve their errands in less than 2 mins compared to 11 mins previously"</div>
             <a class="ref-link" href="https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/" target="_blank">klarna.com/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Klarna</strong></td>
+          <td>Q3 2025 Earnings Call (as reported)<br><span style="color:var(--text-muted); font-size:11px;">CX Dive; primary transcript not verified</span></td>
+          <td class="mono">2025-11-20</td>
+          <td><span class="badge badge-target">Media-Reported</span></td>
+          <td>
+            <strong>Work of more than 853 full-time agents; $60M saved.</strong>
+            <div class="source-quote">The AI customer service agent "can now do the work of more than 853 full-time agents, according to Klarna CEO and co-founder Sebastian Siemiatkowski."</div>
+            <a class="ref-link" href="https://www.customerexperiencedive.com/news/klarna-says-ai-agent-work-853-employees/805987/" target="_blank">customerexperiencedive.com/klarna-says-ai-agent-work-853-employees &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Microsoft</strong></td>
+          <td>LlamaCon Fireside (as reported)<br><span style="color:var(--text-muted); font-size:11px;">Satya Nadella (CEO), via Mashable</span></td>
+          <td class="mono">2025-04-29</td>
+          <td><span class="badge badge-target">Media-Reported</span></td>
+          <td>
+            <strong>20%–30% of code in Microsoft repos written by AI.</strong>
+            <div class="source-quote">"Maybe 20 to 30 percent of the code that is inside of our repos today, and some of our projects, are probably all written by [AI] software."</div>
+            <a class="ref-link" href="https://mashable.com/article/llamacon-mark-zuckerberg-ai-writes-meta-code" target="_blank">mashable.com/llamacon-mark-zuckerberg-ai-writes-meta-code &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>FactSet</strong></td>
+          <td>Q3 FY2026 Earnings Call<br><span style="color:var(--text-muted); font-size:11px;">Sanoke Viswanathan, CEO</span></td>
+          <td class="mono">2026-07-01</td>
+          <td><span class="badge badge-verified">Earnings Call</span></td>
+          <td>
+            <strong>27% of committed code authored by coding agents (adopting teams only).</strong>
+            <div class="source-quote">"Coding agents now author 27% of committed code in the engineering teams using these tools." … "we initiated a roughly 10% reduction in our technology workforce"</div>
+            <a class="ref-link" href="https://www.fool.com/earnings/call-transcripts/2026/07/01/factset-fds-q3-2026-earnings-call-transcript/" target="_blank">fool.com/factset-fds-q3-2026-earnings-call-transcript &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Zeta Global</strong></td>
+          <td>Q2 2026 Earnings Call<br><span style="color:var(--text-muted); font-size:11px;">David Steinberg, Co-Founder &amp; CEO</span></td>
+          <td class="mono">2026-08-04</td>
+          <td><span class="badge badge-verified">Earnings Call</span></td>
+          <td>
+            <strong>89.6% of new code automated in Q2 2026 (75% in Q1).</strong>
+            <div class="source-quote">"In the second quarter, 90% of our new code generated was automated." … "the actual number for Q2 was 89.6%." … "using our internal workflow management tool, Spade, we were able to literally automate 75% of all new code generated."</div>
+            <a class="ref-link" href="https://www.fool.com/earnings/call-transcripts/2026/08/11/zeta-global-zeta-q2-2026-earnings-call-transcript/" target="_blank">fool.com/zeta-global-zeta-q2-2026-earnings-call-transcript &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Compass</strong></td>
+          <td>Q1 &amp; Q2 2026 Earnings Calls<br><span style="color:var(--text-muted); font-size:11px;">Robert Reffkin, Founder &amp; CEO</span></td>
+          <td class="mono">2026-05-05<br>2026-08-06</td>
+          <td><span class="badge badge-verified">Earnings Call</span></td>
+          <td>
+            <strong>30–40% &rarr; 50–60% of new code produced by AI; +20% product velocity.</strong>
+            <div class="source-quote">Q1: "We now estimate that 30% to 40% of all new code written at Compass is produced by AI, which is helping accelerate product development velocity by 20%, while keeping our technology OpEx unchanged." Q2: "across the technology organization, 50% to 60% of all new code is now produced by AI"</div>
+            <a class="ref-link" href="https://www.aol.com/articles/compass-comp-q1-2026-earnings-151715369.html" target="_blank">Q1 transcript (Motley Fool via AOL) &rarr;</a> &bull;
+            <a class="ref-link" href="https://www.aol.com/articles/compass-comp-q2-2026-earnings-235837000.html" target="_blank">Q2 transcript (Motley Fool via AOL) &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>N-able</strong></td>
+          <td>Q2 2026 Earnings Call<br><span style="color:var(--text-muted); font-size:11px;">John Pagliuca, President &amp; CEO</span></td>
+          <td class="mono">2026-08-10</td>
+          <td><span class="badge badge-verified">Earnings Call</span></td>
+          <td>
+            <strong>47% of all committed code AI-generated.</strong>
+            <div class="source-quote">"AI-generated code accounting for 47% of all committed code in the second quarter" … "some features shipping 10x to 12x faster than prior road map estimates"</div>
+            <a class="ref-link" href="https://www.fool.com/earnings/call-transcripts/2026/08/17/n-able-nabl-q2-2026-earnings-call-transcript/" target="_blank">fool.com/n-able-nabl-q2-2026-earnings-call-transcript &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Cognizant</strong></td>
+          <td>Q3 2025, Q1 2026, Q2 2026 Earnings Calls<br><span style="color:var(--text-muted); font-size:11px;">Ravi Kumar S, CEO · IR-hosted corrected transcripts</span></td>
+          <td class="mono">2025-10-29<br>2026-04-29<br>2026-07-29</td>
+          <td><span class="badge badge-verified">IR Transcript</span></td>
+          <td>
+            <strong>~30% AI-generated &rarr; &gt;40% AI-assisted internal code.</strong>
+            <div class="source-quote">Q3 2025: "approximately 30% of our internal code was AI-generated… We believe it could reach 50% in the years ahead." Q1 2026: "nearly 40% of our code to be AI-assisted." Q2 2026: "Over 40% of our software development is now AI assisted."</div>
+            <a class="ref-link" href="https://cognizant.q4cdn.com/123993165/files/doc_earnings/2025/q3/transcript/Transcript_CTSHQ3-2025-Earnings-Call.pdf" target="_blank">Q3 2025 PDF &rarr;</a> &bull;
+            <a class="ref-link" href="https://cognizant.q4cdn.com/123993165/files/doc_earnings/2026/q1/transcript/Transcript_CTSHQ1-2026-Earnings-Call.pdf" target="_blank">Q1 2026 PDF &rarr;</a> &bull;
+            <a class="ref-link" href="https://cognizant.q4cdn.com/123993165/files/doc_earnings/2026/q2/transcript/Transcript_CTSHQ2-2026-Earnings-Call.pdf" target="_blank">Q2 2026 PDF &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Accenture</strong></td>
+          <td>Quantifying Copilot's Impact in the Enterprise<br><span style="color:var(--text-muted); font-size:11px;">GitHub Research &amp; Accenture (randomized trial)</span></td>
+          <td class="mono">2024-05-13</td>
+          <td><span class="badge badge-verified">Empirical Trial</span></td>
+          <td>
+            <strong>+8.69% pull requests; +15% merge rate; +84% successful builds.</strong>
+            <div class="source-quote">"Accenture developers saw an 8.69% increase in pull requests." … "Over 80% of Accenture participants successfully adopted GitHub Copilot." Vendor-published; independent re-analysis reports the Accenture effects were not statistically significant.</div>
+            <a class="ref-link" href="https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-in-the-enterprise-with-accenture/" target="_blank">github.blog/quantifying-copilot-impact-with-accenture &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>MercadoLibre</strong></td>
+          <td>GitHub Customer Story<br><span style="color:var(--text-muted); font-size:11px;">GitHub Enterprise case study (vendor, undated)</span></td>
+          <td class="mono">n.d.</td>
+          <td><span class="badge badge-reported">Vendor Case Study</span></td>
+          <td>
+            <strong>9,000+ developers on Copilot; ~50% less time writing code.</strong>
+            <div class="source-quote">"~50% reduction in time spent writing code with GitHub Copilot" · "9,000+ developers using Copilot" · "100,000 pull requests merged per day"</div>
+            <a class="ref-link" href="https://github.com/customer-stories/mercado-libre" target="_blank">github.com/customer-stories/mercado-libre &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Shopify</strong></td>
+          <td>Under the River<br><span style="color:var(--text-muted); font-size:11px;">Shopify Engineering Blog (Libbey &amp; Moreno)</span></td>
+          <td class="mono">2026-05-28</td>
+          <td><span class="badge badge-verified">Official Engineering</span></td>
+          <td>
+            <strong>1 in 8 merged PRs co-authored by the River agent.</strong>
+            <div class="source-quote">"one in eight merged pull requests across Shopify is coauthored by it." In a recent 30-day period: 59,918 sessions, 5,170 Slack channels, 7,000+ people, 3,536 River-coauthored PRs merged.</div>
+            <a class="ref-link" href="https://shopify.engineering/under-the-river" target="_blank">shopify.engineering/under-the-river &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>GitLab</strong></td>
+          <td>Q1 FY2027 Prepared Remarks<br><span style="color:var(--text-muted); font-size:11px;">Telemetry-gap evidence</span></td>
+          <td class="mono">2026-06-02</td>
+          <td><span class="badge badge-gap">Customer Metrics Only</span></td>
+          <td>
+            <strong>No internal engineering output metric disclosed.</strong>
+            <div class="source-quote">Remarks cite customer outcomes only (e.g. AI-assisted workflows help Zillow's engineering teams "ship 40% more code per engineer").</div>
+            <a class="ref-link" href="https://s204.q4cdn.com/984476563/files/doc_financials/2027/q1/GitLab-Q1FY2027-Earnings-Prepared-Remarks.pdf" target="_blank">GitLab Q1 FY27 prepared remarks (PDF) &rarr;</a>
           </td>
         </tr>
       </tbody>
     </table>
+    </div>
   </section>
 
 </main>
 
 <script>
-  function showDevStat(company, year, tool, adoption, output) {
-    document.getElementById('inspTitle').textContent = company + ' (' + year + ')';
-    document.getElementById('inspSubtitle').textContent = 'Internal developer telemetry';
-    document.getElementById('inspTool').textContent = tool;
-    document.getElementById('inspAdoption').textContent = adoption;
-    document.getElementById('inspOutput').textContent = output;
+  // Every point below maps to a row in data/facts.csv (row id in `id`).
+  // status: 'verified' = primary-source disclosure (solid); 'target' / 'reported' = dashed.
+  const SERIES = [
+    { company: 'Google', color: 'var(--c-google)', label: 'Google', labelPos: 'right', labelIdx: 1, points: [
+      { id: 'fact_google_2024', date: '2024-10-29', v: 25, display: '>25%', status: 'verified', metric: 'Share of new code AI-generated', quote: '"more than a quarter of all new code at Google is generated by AI, then reviewed and accepted by engineers"', source: 'Alphabet Q3 2024 call (blog.google)' },
+      { id: 'fact_google_2025_fall', date: '2025-10-15', v: 50, display: '50% (fall 2025, approx. date)', status: 'verified', metric: 'Share of new code AI-generated', quote: '"…up from 50% last fall" (restated Apr 2026)', source: 'Pichai, Cloud Next 2026 (blog.google)' },
+      { id: 'fact_google_2026', date: '2026-04-22', v: 75, display: '75%', status: 'verified', metric: 'Share of new code AI-generated & approved by engineers', quote: '"75% of all new code at Google is now AI-generated and approved by engineers"', source: 'Pichai, Cloud Next 2026 (blog.google)' } ] },
+    { company: 'Microsoft', color: 'var(--c-msft)', label: 'Microsoft (reported)', labelPos: 'right', points: [
+      { id: 'fact_msft_2025_nadella', date: '2025-04-29', v: 25, lo: 20, hi: 30, display: '20%–30%', status: 'reported', metric: 'Code in Microsoft repos written by AI', quote: 'Nadella: "Maybe 20 to 30 percent of the code that is inside of our repos today…"', source: 'LlamaCon remarks, as reported by Mashable' } ] },
+    { company: 'Meta', color: 'var(--c-meta)', label: 'Meta (targets)', labelPos: 'right', points: [
+      { id: 'fact_meta_2025_llamacon', date: '2025-04-29', v: 50, display: '~50% (target)', status: 'target', metric: 'Development done by AI within a year', quote: 'Zuckerberg: "maybe half the development is going to be done by AI as opposed to people"', source: 'LlamaCon, as reported by Mashable' },
+      { id: 'fact_meta_2026_targets', date: '2026-06-30', v: 75, display: '>75% for 65% of engineers (target)', status: 'target', metric: 'Creation org only: committed code written with AI', quote: 'Target for H1 2026 from a leaked internal document', source: 'Business Insider via Livemint (media)' } ] },
+    { company: 'Zeta Global', color: 'var(--c-expansion)', label: 'Zeta Global', labelPos: 'right', points: [
+      { id: 'fact_zeta_2026_q1_codeshare', date: '2026-03-31', v: 75, display: '75% (Q1 2026)', status: 'verified', metric: 'New code automated via internal tool Spade', quote: '"we were able to literally automate 75% of all new code generated"', source: 'Q2 2026 earnings call transcript' },
+      { id: 'fact_zeta_2026_q2_codeshare', date: '2026-06-30', v: 89.6, display: '89.6% (Q2 2026)', status: 'verified', metric: 'New code generated/automated by AI', quote: '"the actual number for Q2 was 89.6%"', source: 'Q2 2026 earnings call transcript' } ] },
+    { company: 'Compass', color: 'var(--c-expansion)', label: 'Compass', labelPos: 'right', points: [
+      { id: 'fact_compass_2026_q1_codeshare', date: '2026-05-05', v: 35, lo: 30, hi: 40, display: '30%–40%', status: 'verified', metric: 'New code produced by AI (+20% product velocity)', quote: '"30% to 40% of all new code written at Compass is produced by AI"', source: 'Q1 2026 earnings call transcript' },
+      { id: 'fact_compass_2026_q2_codeshare', date: '2026-08-06', v: 55, lo: 50, hi: 60, display: '50%–60%', status: 'verified', metric: 'New code produced by AI', quote: '"50% to 60% of all new code is now produced by AI"', source: 'Q2 2026 earnings call transcript' } ] },
+    { company: 'N-able', color: 'var(--c-expansion)', label: 'N-able', labelPos: 'above', points: [
+      { id: 'fact_nable_2026_q2_codeshare', date: '2026-06-30', v: 47, display: '47%', status: 'verified', metric: 'Committed code AI-generated', quote: '"AI-generated code accounting for 47% of all committed code in the second quarter"', source: 'Q2 2026 earnings call transcript' } ] },
+    { company: 'Cognizant', color: 'var(--c-expansion)', label: 'Cognizant', labelPos: 'right', points: [
+      { id: 'fact_cognizant_2025_q3_codeshare', date: '2025-09-30', v: 30, display: '~30%', status: 'verified', metric: 'Internal code AI-generated', quote: '"approximately 30% of our internal code was AI-generated"', source: 'IR-hosted Q3 2025 transcript' },
+      { id: 'fact_cognizant_2026_q1_codeshare', date: '2026-04-29', v: 40, display: '~40%', status: 'verified', metric: 'Code AI-assisted (definition changed)', quote: '"nearly 40% of our code to be AI-assisted"', source: 'IR-hosted Q1 2026 transcript' },
+      { id: 'fact_cognizant_2026_q2_codeshare', date: '2026-07-29', v: 40, display: '>40%', status: 'verified', metric: 'Software development AI-assisted', quote: '"Over 40% of our software development is now AI assisted"', source: 'IR-hosted Q2 2026 transcript' } ] },
+    { company: 'FactSet', color: 'var(--c-expansion)', label: 'FactSet (adopting teams)', labelPos: 'right', points: [
+      { id: 'fact_factset_2026_q3_codeshare', date: '2026-07-01', v: 27, display: '27%', status: 'verified', metric: 'Committed code by coding agents, adopting teams only', quote: '"Coding agents now author 27% of committed code in the engineering teams using these tools"', source: 'Q3 FY2026 earnings call transcript' } ] },
+    { company: 'Shopify', color: 'var(--c-expansion)', label: 'Shopify (PR share)', labelPos: 'right', points: [
+      { id: 'fact_shopify_2026_river_share', date: '2026-05-28', v: 12.5, display: '1 in 8 merged PRs', status: 'verified', metric: 'Merged PRs co-authored by River agent', quote: '"one in eight merged pull requests across Shopify is coauthored by it"', source: 'Shopify Engineering, Under the River' } ] },
+  ];
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const X0 = 70, X1 = 860, Y0 = 380, Y1 = 40;
+  const T0 = Date.UTC(2024, 0, 1), T1 = Date.UTC(2027, 0, 1);
+  const xOf = d => { const [y, m, dd] = d.split('-').map(Number); return X0 + (Date.UTC(y, m - 1, dd) - T0) / (T1 - T0) * (X1 - X0); };
+  const yOf = v => Y0 - v / 100 * (Y0 - Y1);
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+
+  function renderChart() {
+    const svg = document.getElementById('mainSvg');
+    // Grid + axes
+    [0, 25, 50, 75, 100].forEach(v => {
+      el('line', { x1: X0, y1: yOf(v), x2: X1, y2: yOf(v), class: v === 0 ? 'axis-line' : 'grid-dash' }, svg);
+      el('text', { x: X0 - 10, y: yOf(v) + 4, 'text-anchor': 'end', class: 'tick-text' }, svg).textContent = v + '%';
+    });
+    ['2024-01-01', '2025-01-01', '2026-01-01', '2027-01-01'].forEach((d, i) => {
+      el('line', { x1: xOf(d), y1: Y1, x2: xOf(d), y2: Y0, class: i === 0 ? 'axis-line' : 'grid-dash' }, svg);
+    });
+    ['2024', '2025', '2026'].forEach(y => {
+      el('text', { x: (xOf(y + '-01-01') + xOf((+y + 1) + '-01-01')) / 2, y: Y0 + 22, 'text-anchor': 'middle', class: 'tick-text' }, svg).textContent = y;
+    });
+    const yt = el('text', { x: 22, y: (Y0 + Y1) / 2, 'text-anchor': 'middle', transform: `rotate(-90 22 ${(Y0 + Y1) / 2})`, class: 'axis-title' }, svg);
+    yt.textContent = 'Disclosed AI share of code (%)';
+    el('text', { x: (X0 + X1) / 2, y: Y0 + 48, 'text-anchor': 'middle', class: 'axis-title' }, svg).textContent = 'Date the figure applied';
+
+    SERIES.forEach(s => {
+      const g = el('g', { class: 'company-plot', 'data-company': s.company, style: `color:${s.color}` }, svg);
+      // connecting lines: solid only when both ends are verified
+      for (let i = 1; i < s.points.length; i++) {
+        const a = s.points[i - 1], b = s.points[i];
+        const both = a.status === 'verified' && b.status === 'verified';
+        el('line', { x1: xOf(a.date), y1: yOf(a.v), x2: xOf(b.date), y2: yOf(b.v), stroke: 'currentColor', 'stroke-width': 2, opacity: 0.7, 'stroke-dasharray': both ? '' : '5 4', class: 'path-line' }, g);
+      }
+      s.points.forEach(p => {
+        const x = xOf(p.date), y = yOf(p.v);
+        const node = el('g', { class: 'dot-node yr-' + p.date.slice(0, 4) + (p.status === 'verified' ? '' : ' unverified'), tabindex: 0 }, g);
+        if (p.lo != null) el('line', { x1: x, y1: yOf(p.lo), x2: x, y2: yOf(p.hi), class: 'range-bar' }, node);
+        el('circle', { cx: x, cy: y, r: 14, fill: 'transparent', class: 'hit' }, node);
+        el('circle', { cx: x, cy: y, r: 6.5, fill: 'currentColor', stroke: '#fff', 'stroke-width': 2, class: 'mark' }, node);
+        el("title", {}, node).textContent = `${s.company}: ${p.display} [${p.status}] — ${p.source}`;
+        const show = () => showPoint(s.company, p);
+        node.addEventListener('mouseenter', show);
+        node.addEventListener('focus', show);
+        node.addEventListener('click', show);
+      });
+      const last = s.points[s.labelIdx != null ? s.labelIdx : s.points.length - 1];
+      const lx = xOf(last.date), ly = yOf(last.v);
+      const pos = {
+        above: { x: lx, y: ly - 12, anchor: 'middle' },
+        right: { x: lx + 11, y: ly + 4, anchor: 'start' },
+        left: { x: lx + (s.labelDx || -11), y: ly + 4, anchor: 'end' },
+      }[s.labelPos];
+      const t = el('text', { class: 'node-label', x: pos.x, y: pos.y, 'text-anchor': pos.anchor }, g);
+      t.textContent = s.label;
+    });
+  }
+
+  function showPoint(company, p) {
+    const tag = p.status === 'verified' ? 'VERIFIED' : (p.status === 'target' ? 'TARGET' : 'MEDIA-REPORTED');
+    document.getElementById('inspTitle').textContent = `${company} · ${p.date.slice(0, 7)} · ${tag}`;
+    document.getElementById('inspSubtitle').textContent = p.metric;
+    document.getElementById('inspTool').textContent = p.metric.length > 34 ? p.metric.slice(0, 32) + '…' : p.metric;
+    document.getElementById('inspAdoption').textContent = p.display;
+    document.getElementById('inspOutput').textContent = p.source;
+    document.getElementById('inspQuote').textContent = p.quote;
+  }
+
+  function renderControls() {
+    const box = document.getElementById('companyFilters');
+    const legend = document.getElementById('legendGrid');
+    SERIES.forEach(s => {
+      const b = document.createElement('button');
+      b.className = 'btn-pill'; b.dataset.company = s.company; b.textContent = s.company;
+      b.onclick = () => filterCompany(s.company);
+      box.appendChild(b);
+      const last = s.points[s.points.length - 1];
+      const pill = document.createElement('div');
+      pill.className = 'legend-pill'; pill.onclick = () => filterCompany(s.company);
+      pill.innerHTML = `<div class="legend-head"><span class="dot" style="background:${s.color}"></span></div><div class="legend-stat"></div>`;
+      pill.querySelector('.legend-head').append(s.company);
+      pill.querySelector('.legend-stat').textContent = `${last.display} · ${last.status === 'verified' ? 'verified' : last.status}`;
+      legend.appendChild(pill);
+    });
   }
 
   function filterYear(year) {
-    document.querySelectorAll('.control-row .btn-pill').forEach(btn => {
-      if (btn.textContent.includes('202') || btn.textContent.includes('All')) {
-        if (!btn.parentElement.textContent.includes('Company')) {
-          btn.classList.toggle('active', btn.textContent.toLowerCase().includes(year) || (year === 'all' && btn.textContent.includes('All')));
-        }
-      }
+    document.querySelectorAll('.control-row [data-year]').forEach(b => b.classList.toggle('active', b.dataset.year === year));
+    document.querySelectorAll('#mainSvg .dot-node').forEach(n => {
+      n.style.opacity = (year === 'all' || n.classList.contains('yr-' + year)) ? '1' : '0.15';
     });
-    const nodes = document.querySelectorAll('.dot-node');
-    const lines = document.querySelectorAll('.path-line');
-    if (year === 'all') {
-      nodes.forEach(n => n.style.opacity = '1');
-      lines.forEach(l => l.style.opacity = '0.75');
-    } else {
-      nodes.forEach(n => {
-        n.style.opacity = n.classList.contains('yr-' + year) ? '1' : '0.15';
-      });
-      lines.forEach(l => l.style.opacity = '0.2');
-    }
+    document.querySelectorAll('#mainSvg .path-line').forEach(l => l.style.opacity = year === 'all' ? '' : '0.2');
   }
 
   function filterCompany(companyName) {
-    document.querySelectorAll('.control-row .btn-pill').forEach(btn => {
-      if (btn.parentElement.textContent.includes('Company')) {
-        btn.classList.toggle('active', btn.textContent === companyName || (companyName === 'all' && btn.textContent === 'All'));
-      }
-    });
-    const plots = document.querySelectorAll('.company-plot');
-    plots.forEach(p => {
-      if (companyName === 'all' || p.getAttribute('data-company') === companyName) {
-        p.style.opacity = '1';
-        p.querySelectorAll('circle').forEach(c => c.setAttribute('r', '13'));
-      } else {
-        p.style.opacity = '0.12';
-        p.querySelectorAll('circle').forEach(c => c.setAttribute('r', '7'));
-      }
+    document.querySelectorAll('#companyFilters [data-company]').forEach(b => b.classList.toggle('active', b.dataset.company === companyName));
+    document.querySelectorAll('#mainSvg .company-plot').forEach(p => {
+      p.style.opacity = (companyName === 'all' || p.dataset.company === companyName) ? '1' : '0.12';
     });
   }
+
+  renderChart();
+  renderControls();
 </script>
 
 </body>
