@@ -341,10 +341,6 @@
     <a href="#productivity">Productivity</a>
     <a href="#backfire">Counter-evidence</a>
     <a href="#register">Register</a>
-    <a href="#telemetry">Case Studies</a>
-    <a href="#workflows">Workflows</a>
-    <a href="#takeaways">Takeaways</a>
-    <a href="#references">References</a>
   </nav>
 </header>
 
@@ -368,7 +364,7 @@
   <section class="section-card" id="trajectory">
     <div class="section-kicker">Multi-Year Trajectory (2024–2026)</div>
     <h2>Disclosed AI Share of Code, Over Time</h2>
-    <p class="lead">Every point is a figure the company itself stated, plotted on the date it applied. Output effects use different units (PRs, developer-years, minutes), so they are in the Case Studies section, not on this axis.</p>
+    <p class="lead">Every point is a figure the company itself stated, plotted on the date it applied. Output effects use different units (PRs, developer-years, minutes), so they are in the Productivity Evidence chart below, not on this axis.</p>
 
     <div class="control-row">
       <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
@@ -437,7 +433,7 @@
     <div class="chart-box" style="overflow-x:auto;">
       <svg id="prodSvg" width="100%" style="min-width:640px;" role="img" aria-label="Verified productivity figures grouped by strength of evidence"></svg>
     </div>
-    <p class="chart-note">Not plotted: Stripe's &gt;1,000 merged agent-written PRs per week (a count with no before-and-after baseline; see Case Studies), and figures that measure inputs rather than output (Infosys's 28M AI-generated lines across client work, FactSet's coding-token growth).</p>
+    <p class="chart-note">Not plotted: Stripe's &gt;1,000 merged agent-written PRs per week (a count with no before-and-after baseline), and figures that measure inputs rather than output (Infosys's 28M AI-generated lines across client work, FactSet's coding-token growth).</p>
   </section>
 
   <!-- ================= 3c. COUNTER-EVIDENCE ================= -->
@@ -499,252 +495,6 @@
       <svg id="rankSvg" width="100%" style="min-width:640px;" role="img" aria-label="Ranked AI code share disclosures by company"></svg>
     </div>
 
-  </section>
-
-  <!-- ================= 3. COMPANY TELEMETRY ================= -->
-  <section class="section-card" id="telemetry">
-    <div class="section-kicker">Case Studies</div>
-    <h2>Documented Corporate Telemetry</h2>
-    <p class="lead">What each company reported beyond code share: output, time saved, and workforce effects. Every figure comes from the company's own earnings call, filing, blog or published study, except two marked as published by GitHub (the tool's vendor). Each was re-checked against its source on 13 Oct 2026.</p>
-
-    <div class="table-scroll">
-    <table>
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>Internal Tool</th>
-          <th>Adoption / Code Share</th>
-          <th>Primary Output Metric</th>
-          <th>Disclosed Real-World Impact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Google</strong></td>
-          <td>Internal AI coding agents</td>
-          <td><strong>&gt;25% (Oct 2024) &rarr; 50% (fall 2025) &rarr; 75% (Apr 2026)</strong> of new code</td>
-          <td>% New Code Generated</td>
-          <td>No org-wide cycle-time metric. One anecdote: a complex migration completed 6x faster than a year earlier.</td>
-        </tr>
-        <tr>
-          <td><strong>Microsoft</strong></td>
-          <td>GitHub Copilot</td>
-          <td>16,223 Cloud+AI engineers studied (Feb–Dec 2025)</td>
-          <td>PR Throughput &amp; Speed</td>
-          <td><strong>+40.5% PRs</strong> in highest- vs zero-usage weeks (observational preprint). Separate 2022 RCT of 95 recruited developers (not Microsoft staff): one task <strong>55.8% faster</strong>.</td>
-        </tr>
-        <tr>
-          <td><strong>Amazon</strong></td>
-          <td>Amazon Q Developer</td>
-          <td>&gt;50% of production Java systems upgraded in &lt;6 months (2024)</td>
-          <td>Engineering Time Saved</td>
-          <td><strong>4,500 developer-years saved</strong> (company estimate); Java 17 upgrades ~50 dev-days &rarr; a few hours; 79% of auto-generated code reviews shipped without changes; $260M annualized gains</td>
-        </tr>
-        <tr>
-          <td><strong>Stripe</strong></td>
-          <td>Minions (one-shot agents)</td>
-          <td>Not disclosed</td>
-          <td>Merged Agent PRs</td>
-          <td><strong>&gt;1,000 merged PRs/week</strong> fully Minion-produced, human-reviewed</td>
-        </tr>
-        <tr>
-          <td><strong>Meta</strong></td>
-          <td>Agentic coding tools</td>
-          <td>Not disclosed</td>
-          <td>Output per Engineer</td>
-          <td><strong>+30% output per engineer</strong> since the start of 2025, +80% for AI power users (CFO, Q4 2025 prepared remarks)</td>
-        </tr>
-        <tr>
-          <td><strong>Klarna</strong></td>
-          <td>OpenAI Assistant</td>
-          <td>Support operations (not engineering)</td>
-          <td>Workforce Resolution</td>
-          <td>Work of <strong>700 FTEs</strong>; resolution time 11 min &rarr; under 2 min (Feb 2024)</td>
-        </tr>
-        <tr>
-          <td><strong>FactSet</strong></td>
-          <td>Coding agents</td>
-          <td><strong>27%</strong> of committed code (adopting teams only)</td>
-          <td>Committed Code Share</td>
-          <td>Coding token use 5x QoQ; AI-written committed lines ~10x; ~10% tech workforce reduction</td>
-        </tr>
-        <tr>
-          <td><strong>Zeta Global</strong></td>
-          <td>Spade (internal workflow tool)</td>
-          <td><strong>75% (Q1) &rarr; 89.6% (Q2 2026)</strong> of new code</td>
-          <td>New Code Share</td>
-          <td>Added engineers in Q2; internal AI cost "well under 1% of revenue". No throughput or cycle-time metric</td>
-        </tr>
-        <tr>
-          <td><strong>Compass</strong></td>
-          <td>AI coding tools</td>
-          <td><strong>30–40% (Q1) &rarr; 50–60% (Q2 2026)</strong> of new code</td>
-          <td>Product Dev Velocity</td>
-          <td><strong>+20% product development velocity</strong> with tech OpEx unchanged (Q1 2026)</td>
-        </tr>
-        <tr>
-          <td><strong>N-able</strong></td>
-          <td>AI coding tools</td>
-          <td><strong>47%</strong> of committed code (Q2 2026)</td>
-          <td>Committed Code Share</td>
-          <td>"Some features" 10–12x faster than roadmap estimates (anecdotal); ~6% headcount reduction planned for H2 2026</td>
-        </tr>
-        <tr>
-          <td><strong>Cognizant</strong></td>
-          <td>Claude, Gemini, Copilot, Devin, Codex</td>
-          <td><strong>~30% (Q3 2025) &rarr; &gt;40% (Q2 2026)</strong></td>
-          <td>Internal Code Share</td>
-          <td>Definition shifted from AI-generated to AI-assisted. Expects it "could reach 50% in the years ahead" (Q3 2025)</td>
-        </tr>
-        <tr>
-          <td><strong>Accenture</strong></td>
-          <td>GitHub Copilot (RCT)</td>
-          <td>&gt;80% of participants adopted</td>
-          <td>PRs, Merge Rate, Builds</td>
-          <td><strong>+8.69% PRs</strong>; +15% merge rate; +84% successful builds (published by GitHub, the tool vendor)</td>
-        </tr>
-        <tr>
-          <td><strong>MercadoLibre</strong></td>
-          <td>GitHub Copilot</td>
-          <td>9,000+ of 10,000+ developers</td>
-          <td>Time Writing Code</td>
-          <td><strong>~50% less time writing code</strong> (GitHub vendor case study, undated)</td>
-        </tr>
-        <tr>
-          <td><strong>Shopify</strong></td>
-          <td>River (Slack agent)</td>
-          <td><strong>1 in 8</strong> merged PRs co-authored</td>
-          <td>Merged Agent PRs</td>
-          <td><strong>3,536</strong> River-co-authored PRs merged in 30 days; touched the work of 7,000+ people</td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-  </section>
-
-  <!-- ================= 4. WORKFLOW SHIFTS ================= -->
-  <section class="section-card" id="workflows">
-    <div class="section-kicker">Operational Reality</div>
-    <h2>How Engineering Work Actually Changed</h2>
-    <p class="lead">Where internal AI creates immediate output dividends, and where teams hit constraints.</p>
-
-    <div class="grid-2x2">
-      <div class="info-card">
-        <div class="info-head">
-          <span class="info-title">1. The Review Bottleneck</span>
-          <span class="info-tag">Constraint</span>
-        </div>
-        <div class="info-text">
-          Faros AI telemetry from 10,000+ developers across 1,255 teams: on high-adoption teams, developers merged 98% more pull requests, but PR review time rose 91% and average PR size 154%, and there was "no significant correlation" with company-level gains (<a class="ref-link" href="https://www.faros.ai/blog/ai-software-engineering#:~:text=Developers%20on%20teams%20with%20high,PR%20review%20time%20increases%2091%25" target="_blank" rel="noopener">Faros AI</a>, an engineering-analytics vendor). More code does not mean faster shipping if review does not scale.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-head">
-          <span class="info-title">2. Legacy Modernization</span>
-          <span class="info-tag">Highest ROI</span>
-        </div>
-        <div class="info-text">
-          Amazon's largest disclosed gain came from mechanical upgrade work: Java 17 upgrades fell from ~50 developer-days to a few hours, an estimated 4,500 developer-years saved. Our interpretation (not Amazon's claim): well-specified, testable upgrade work is where AI output is easiest to verify.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-head">
-          <span class="info-title">3. Autonomous Slack Agents</span>
-          <span class="info-tag">Agentic Leap</span>
-        </div>
-        <div class="info-text">
-          Moving from passive IDE autocomplete to asynchronous background agents (like Stripe Minions) yields &gt;1,000 merged PRs/week at Stripe without engineers waiting on completions.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-head">
-          <span class="info-title">4. Who Benefits Most?</span>
-          <span class="info-tag">Unquantified</span>
-        </div>
-        <div class="info-text">
-          The 2022 Copilot RCT reports heterogeneous effects that "show promise for AI pair programmers to help people transition into software development careers." No primary source in this dataset quantifies a seniority gap, so we give no number.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 5. STRATEGIC TAKEAWAYS ================= -->
-  <section class="section-card" id="takeaways">
-    <div class="section-kicker">Strategic Takeaways</div>
-    <h2>Guidelines for Engineering Leadership</h2>
-    <p class="lead">Core principles for measuring and scaling internal developer AI.</p>
-
-    <div class="grid-2x2">
-      <div class="info-card">
-        <div class="info-head">
-          <span class="info-title">Stop Tracking Lines of Code</span>
-        </div>
-        <div class="info-text">
-          Lines of Code is a vanity metric that incentivizes bloated repositories. Measure completed pull requests, lead time for changes, and cycle time.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-head">
-          <span class="info-title">Build Agent-Friendly CI/CD</span>
-        </div>
-        <div class="info-text">
-          AI agents fail in brittle, slow CI/CD pipelines. Fast, modular test suites allow agents to run tests and fix their own errors before requesting human review.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-head">
-          <span class="info-title">Automate the Migration Tax</span>
-        </div>
-        <div class="info-text">
-          Free your best senior engineers by delegating framework upgrades, library deprecations, and boilerplate test authoring to AI tools.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-head">
-          <span class="info-title">Engineers as System Architects</span>
-        </div>
-        <div class="info-text">
-          As AI drafts a growing share of code (from a quarter to nearly all new code, where disclosed), human engineers shift to curating specifications, evaluating security, and verifying system architecture.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 6. VALIDATION REFERENCES ================= -->
-  <section class="section-card" id="references">
-    <div class="section-kicker">Sources</div>
-    <h2>Where the Numbers Come From</h2>
-    <p class="lead">Every figure links back to the company's own document, and each quote was re-checked against it on 13 Oct 2026. For the companies in the Disclosure Register, hover or tap any dot to see its quote and source.</p>
-
-    <div class="table-scroll">
-    <table class="refs">
-      <thead><tr><th>Company</th><th>What they said</th><th>Source</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Google</strong></td><td>More than a quarter of new code was AI-generated in Oct 2024, rising to 75% by Apr 2026.</td><td><a class="ref-link" href="https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2024/#:~:text=Today%2C%20more%20than%20a%20quarter,reviewed%20and%20accepted%20by%20engineers" target="_blank" rel="noopener">Q3 2024 earnings remarks</a> · <a class="ref-link" href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/cloud-next-2026-sundar-pichai/#:~:text=75%25%20of%20all%20new%20code,up%20from%2050%25%20last%20fall" target="_blank" rel="noopener">Cloud Next 2026</a></td></tr>
-        <tr><td><strong>Microsoft</strong></td><td>Engineers completed 40.5% more pull requests in their heaviest Copilot weeks (16,223 engineers, 2025).</td><td><a class="ref-link" href="https://arxiv.org/abs/2606.00438#:~:text=Engineers%20are%20estimated%20to%20complete,holding%20measured%20development%20effort%20constant" target="_blank" rel="noopener">Microsoft study (preprint)</a></td></tr>
-        <tr><td><strong>GitHub</strong></td><td>In a 2022 trial, 95 developers finished one coding task 55.8% faster with Copilot.</td><td><a class="ref-link" href="https://arxiv.org/abs/2302.06590#:~:text=The%20treatment%20group%2C%20with%20access,faster%20than%20the%20control%20group" target="_blank" rel="noopener">Study</a> · <a class="ref-link" href="https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/#:~:text=developers%20who%20used%20GitHub%20Copilot,who%20didn%E2%80%99t%20use%20GitHub%20Copilot" target="_blank" rel="noopener">GitHub blog</a></td></tr>
-        <tr><td><strong>Amazon</strong></td><td>Java upgrades dropped from about 50 developer-days to a few hours, saving an estimated 4,500 developer-years.</td><td><a class="ref-link" href="https://www.linkedin.com/posts/andy-jassy-8b1615_one-of-the-most-tedious-but-critical-tasks-activity-7232374162185461760-AdSz/" target="_blank" rel="noopener">Andy Jassy's post</a> · <a class="ref-link" href="https://aws.amazon.com/blogs/devops/amazon-q-developer-just-reached-a-260-million-dollar-milestone/" target="_blank" rel="noopener">AWS blog</a></td></tr>
-        <tr><td><strong>Stripe</strong></td><td>Over 1,000 merged pull requests a week are written entirely by its Minions agents, then reviewed by people.</td><td><a class="ref-link" href="https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents" target="_blank" rel="noopener">Stripe engineering blog</a></td></tr>
-        <tr><td><strong>Meta</strong></td><td>Output per engineer is up 30% since the start of 2025, and 80% for AI power users.</td><td><a class="ref-link" href="https://s21.q4cdn.com/399680738/files/doc_financials/2025/q4/META-Q4-2025-Prepared-Remarks.pdf" target="_blank" rel="noopener">Q4 2025 remarks</a></td></tr>
-        <tr><td><strong>Klarna</strong></td><td>Its support assistant did the work of 700 full-time agents in its first month.</td><td><a class="ref-link" href="https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/#:~:text=It%20is%20doing%20the%20equivalent%20work%20of%20700%20full%2Dtime%20agents" target="_blank" rel="noopener">Press release</a></td></tr>
-        <tr><td><strong>Zeta Global</strong></td><td>89.6% of new code was automated in Q2 2026.</td><td><a class="ref-link" href="https://www.fool.com/earnings/call-transcripts/2026/08/11/zeta-global-zeta-q2-2026-earnings-call-transcript/#:~:text=using%20our%20internal%20workflow%20management,of%20all%20new%20code%20generated" target="_blank" rel="noopener">Earnings call</a></td></tr>
-        <tr><td><strong>Compass</strong></td><td>AI now produces 50–60% of new code, after an earlier 20% lift in product velocity.</td><td><a class="ref-link" href="https://www.aol.com/articles/compass-comp-q2-2026-earnings-235837000.html#:~:text=across%20the%20technology%20organization%2C%2050%25,is%20now%20produced%20by%20AI" target="_blank" rel="noopener">Q2 call</a> · <a class="ref-link" href="https://www.aol.com/articles/compass-comp-q1-2026-earnings-151715369.html#:~:text=We%20now%20estimate%20that%2030%25,Compass%20is%20produced%20by%20AI" target="_blank" rel="noopener">Q1 call</a></td></tr>
-        <tr><td><strong>N-able</strong></td><td>47% of committed code was AI-generated in Q2 2026.</td><td><a class="ref-link" href="https://www.fool.com/earnings/call-transcripts/2026/08/17/n-able-nabl-q2-2026-earnings-call-transcript/#:~:text=AI%2Dgenerated%20code%20accounting%20for%2047%25,code%20in%20the%20second%20quarter" target="_blank" rel="noopener">Earnings call</a></td></tr>
-        <tr><td><strong>Cognizant</strong></td><td>About 30% of internal code was AI-generated in 2025; over 40% of development is AI-assisted in 2026.</td><td><a class="ref-link" href="https://cognizant.q4cdn.com/123993165/files/doc_earnings/2025/q3/transcript/Transcript_CTSHQ3-2025-Earnings-Call.pdf" target="_blank" rel="noopener">Q3 2025</a> · <a class="ref-link" href="https://cognizant.q4cdn.com/123993165/files/doc_earnings/2026/q1/transcript/Transcript_CTSHQ1-2026-Earnings-Call.pdf" target="_blank" rel="noopener">Q1 2026</a> · <a class="ref-link" href="https://cognizant.q4cdn.com/123993165/files/doc_earnings/2026/q2/transcript/Transcript_CTSHQ2-2026-Earnings-Call.pdf" target="_blank" rel="noopener">Q2 2026</a></td></tr>
-        <tr><td><strong>FactSet</strong></td><td>Agents write 27% of committed code in the teams that use them.</td><td><a class="ref-link" href="https://www.fool.com/earnings/call-transcripts/2026/07/01/factset-fds-q3-2026-earnings-call-transcript/#:~:text=10x.-,Coding%20agents%20now%20author%2027%25,engineering%20teams%20using%20these%20tools" target="_blank" rel="noopener">Earnings call</a></td></tr>
-        <tr><td><strong>Accenture</strong></td><td>Developers with Copilot opened 8.69% more pull requests in a GitHub trial.</td><td><a class="ref-link" href="https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-in-the-enterprise-with-accenture/#:~:text=Over%2080%25%20of%20Accenture%20participants%20successfully%20adopted%20GitHub%20Copilot" target="_blank" rel="noopener">GitHub research blog</a></td></tr>
-        <tr><td><strong>MercadoLibre</strong></td><td>Developers spend about 50% less time writing code; human-written code is now "the exception".</td><td><a class="ref-link" href="https://github.com/customer-stories/mercado-libre#:~:text=9%2C000%2B%20developers%20using%20Copilot" target="_blank" rel="noopener">GitHub case study</a> · <a class="ref-link" href="https://www.fool.com/earnings/call-transcripts/2026/08/12/mercadolibre-meli-q2-2026-earnings-call-transcript/#:~:text=Today%2C%20human%20written%20code%20is,code%20is%20done%20by%20AI" target="_blank" rel="noopener">Q2 2026 call</a></td></tr>
-        <tr><td><strong>Shopify</strong></td><td>One in eight merged pull requests is co-written by its River agent.</td><td><a class="ref-link" href="https://shopify.engineering/under-the-river#:~:text=one%20in%20eight%20merged%20pull,Shopify%20is%20coauthored%20by%20it" target="_blank" rel="noopener">Shopify Engineering</a></td></tr>
-        <tr><td><strong>Faros AI</strong></td><td>Across 10,000+ developers, teams merged 98% more PRs with AI, but review time rose 91% and company-level delivery did not measurably improve.</td><td><a class="ref-link" href="https://www.faros.ai/blog/ai-software-engineering#:~:text=Developers%20on%20teams%20with%20high,PR%20review%20time%20increases%2091%25" target="_blank" rel="noopener">Faros AI report</a></td></tr>
-      </tbody>
-    </table>
-    </div>
   </section>
 
 </main>
