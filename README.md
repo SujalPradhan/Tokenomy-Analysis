@@ -1,6 +1,6 @@
 # Tokenomy Analysis: Developer AI Usage vs. Engineering Output (2024–2026)
 
-Interactive Executive Briefing and empirical research analyzing how internal AI adoption across **67 companies** (Google, Microsoft, Amazon, Meta, Stripe and a 57-company disclosure register including HubSpot, Airbnb, Uber, DoorDash, IBM, Salesforce, Bank of America, Baidu and MakeMyTrip) translated into code share, pull request throughput, and system modernization. Every figure is quoted verbatim from a checked source.
+Interactive Executive Briefing and empirical research analyzing how internal AI adoption across **59 companies** (Google, Microsoft, Amazon, Meta, Stripe and a 49-company disclosure register including HubSpot, Airbnb, Uber, DoorDash, IBM, Salesforce, Bank of America, Baidu and MakeMyTrip) translated into code share, pull request throughput, and system modernization. Every figure is quoted verbatim from the company's own words (earnings calls, filings, company blogs, CEO posts, or the study itself); media-only claims are excluded.
 
 ## 🚀 Live Briefing
 👉 **[View the Live Executive Briefing](https://sujalpradhan.github.io/Tokenomy-Analysis/)**
@@ -24,4 +24,4 @@ Interactive Executive Briefing and empirical research analyzing how internal AI 
 ---
 
 ### Verified Sources
-Every verified data point traces to a primary source: company earnings transcripts and filings, official company or engineering blogs, CEO posts, or the study itself (arXiv preprints are labelled as such). Targets and media-only claims are marked separately. All sources were re-audited on 2026-10-12; see the audit log in `token-cost-faang/findings.md`.
+Every verified data point traces to a primary source: company earnings transcripts and filings, official company or engineering blogs, CEO posts, or the study itself (arXiv preprints are labelled as such). Claims found only in news reports, podcasts or vendor pages were removed. All sources were re-downloaded and every quote re-checked on 2026-10-13; see the audit logs in `token-cost-faang/findings.md`.

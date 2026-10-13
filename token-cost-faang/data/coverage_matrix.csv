@@ -11,10 +11,10 @@ Amazon,2026,not_found,not_found,no_primary_source
 Stripe,2025,not_found,not_found,no_primary_source
 Stripe,2026,found,found,verified_stripe_engineering_blog
 Meta,2024,not_found,not_found,no_primary_source
-Meta,2025,found,not_found,target_only_media_report
-Meta,2026,found,found,target_only_leaked_doc_media_report
+Meta,2025,not_found,not_found,media_only_excluded
+Meta,2026,not_found,found,verified_q4_2025_prepared_remarks
 Klarna,2024,found,found,verified_klarna_press_release
-Klarna,2025,found,found,reported_media_not_primary
+Klarna,2025,not_found,not_found,media_only_excluded
 Klarna,2026,not_found,not_found,no_primary_source
 FactSet,2026,found,found,verified_earnings_transcript
 Zeta Global,2026,found,not_found,verified_earnings_transcript
@@ -33,7 +33,6 @@ Augment Code,2026,found,not_found,verified_company_blog
 Grindr,2026,found,not_found,verified_earnings_call_transcript
 Uber,2026,found,found,verified_earnings_call_transcript
 Vercel,2026,found,not_found,verified_company_blog
-Spotify,2026,found,not_found,reported_vendor_page
 DocuSign,2026,found,not_found,verified_earnings_call_transcript
 Cognition,2026,found,not_found,verified_company_blog
 nCino,2026,found,not_found,verified_earnings_call_transcript
@@ -48,8 +47,6 @@ Domo,2026,found,not_found,verified_earnings_call_transcript
 Cursor,2026,found,not_found,verified_company_blog
 Workday,2026,found,not_found,verified_earnings_call_transcript
 GoDaddy,2026,found,not_found,verified_earnings_call_transcript
-Genspark,2026,found,not_found,reported_interview
-OpenAI,2026,found,not_found,reported_media_report
 Pinterest,2025,found,not_found,verified_earnings_call_transcript
 Pinterest,2026,found,not_found,verified_earnings_call_transcript
 HubSpot,2026,found,not_found,verified_earnings_call_transcript
@@ -78,8 +75,3 @@ IBM,2026,not_found,found,verified_earnings_call_transcript
 Intuit,2025,not_found,found,verified_earnings_call_transcript
 MakeMyTrip,2026,found,not_found,verified_earnings_call_transcript
 MercadoLibre,2026,found,not_found,verified_earnings_call_transcript
-Citi,2025,not_found,found,reported_media_report
-JPMorgan Chase,2025,not_found,found,reported_media_report
-Morgan Stanley,2025,not_found,found,reported_media_report
-Tencent,undated,found,not_found,reported_media_report
-Alibaba,undated,found,not_found,reported_media_report

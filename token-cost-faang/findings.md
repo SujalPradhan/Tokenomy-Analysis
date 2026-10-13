@@ -1,6 +1,6 @@
 # Internal Developer AI Usage vs. Engineering Output: Findings & Empirical Analysis
 
-> **Validation status (re-audited 2026-10-12):** every figure below was re-checked against its source. ✅ = verified in a primary source (company filing/transcript/blog/CEO post or the study itself). ⚠️ = management target, or known only through media reports. Figures that could not be traced to any source were **removed**, not relabelled. See the audit log at the end of this file.
+> **Validation status (re-audited 2026-10-13):** every figure below was re-checked word-for-word against a freshly downloaded copy of its source. ✅ = verified in a primary source (company filing/transcript/blog/CEO post or the study itself). ⚠️ = a verified quote that states a management target rather than a result. Figures known only from media reports, podcasts or vendor pages, and figures that could not be traced to any source, were **removed**, not relabelled. See the audit logs at the end of this file.
 
 ## 1. Executive Summary
 
@@ -8,11 +8,11 @@
 
 **The Core Finding:** Disclosed AI share of code is rising fast, but almost no company links it to end-to-end delivery output. What is verifiable:
 *   **Google:** AI-generated share of new code rose from **>25% (Oct 2024)** to **50% (fall 2025)** to **75% (Apr 2026)**, all stated by CEO Sundar Pichai on blog.google ✅. No org-wide velocity metric. One anecdote: a complex migration completed 6x faster than a year earlier.
-*   **Microsoft:** Observational study (arXiv preprint by Microsoft authors) of **16,223 Cloud+AI engineers, Feb–Dec 2025**: **+40.5% PRs** in highest- vs zero-Copilot-usage weeks, holding measured effort constant ✅. CEO Satya Nadella said "maybe 20 to 30 percent" of repo code is AI-written (Apr 2025, media-reported ⚠️). The often-cited **55.8% faster** result is a 2022 GitHub RCT of **95 recruited developers** (not Microsoft staff) on one task ✅.
+*   **Microsoft:** Observational study (arXiv preprint by Microsoft authors) of **16,223 Cloud+AI engineers, Feb–Dec 2025**: **+40.5% PRs** in highest- vs zero-Copilot-usage weeks, holding measured effort constant ✅. The often-cited **55.8% faster** result is a 2022 GitHub RCT of **95 recruited developers** (not Microsoft staff) on one task ✅.
 *   **Amazon:** Java 17 upgrades fell from **~50 developer-days to a few hours**; Amazon estimates **4,500 developer-years** saved, **>50% of production Java systems** upgraded in under six months, **79% of auto-generated code reviews** shipped without changes, and **$260M** in annualized efficiency gains (Andy Jassy, Aug 2024) ✅.
 *   **Stripe:** Over **1,000 merged pull requests per week** are completely Minion-produced (Stripe engineering blog, Feb 2026) ✅. InfoQ's ~1,300 figure is secondary and not used.
-*   **Meta:** **+30% output per engineer** since the start of 2025, mostly from agentic coding; +80% year over year for AI power users (CFO Susan Li, Q4 2025 prepared remarks on Meta's investor site) ✅. Code-share figures remain **targets only** ⚠️: Zuckerberg projected ~half of development by AI "in the next year" (Apr 2025); a leaked document shows the creation org targeting 65% of engineers writing >75% of committed code with AI in H1 2026.
-*   **Klarna (customer service, not engineering):** AI assistant did the work of **700 full-time agents** and cut resolution time from 11 to under 2 minutes in its first month (Feb 2024) ✅. 853 FTEs and $60M saved (Q3 2025) is media-reported ⚠️.
+*   **Meta:** **+30% output per engineer** since the start of 2025, mostly from agentic coding; +80% year over year for AI power users (CFO Susan Li, Q4 2025 prepared remarks on Meta's investor site) ✅. Meta has disclosed no AI code-share figure in a primary source.
+*   **Klarna (customer service, not engineering):** AI assistant did the work of **700 full-time agents** and cut resolution time from 11 to under 2 minutes in its first month (Feb 2024) ✅.
 
 **Expansion set (2025–2026):** A second tier of companies now disclose AI code share on earnings calls:
 *   **Zeta Global:** **89.6%** of new code automated in Q2 2026 (75% in Q1) via internal tool Spade.
@@ -24,7 +24,7 @@
 *   **Accenture:** Randomized Copilot trial: **+8.69% PRs**, +15% merge rate, +84% successful builds (vendor-published).
 *   **MercadoLibre:** 9,000+ developers on Copilot; **~50% less time writing code** (GitHub vendor case study, undated).
 
-**Expansion II (53 more companies, section 2c):** Verified code-share disclosures now span 40+ companies and cluster between 50% and 90% (HubSpot 97% AI-assisted, Chime 84%, Instacart >80%, MakeMyTrip >75%, DocuSign ~75%, Airbnb ~60%, DoorDash "closer to two-thirds", Pinterest ~50%, Workday >50%, Baidu >50%). Output metrics are per-engineer activity counts: Uber 2x code output per engineer, Block +150% code changes per engineer, Coinbase +~80% PRs per engineer, Robinhood +50% commits per engineer, IBM +45% developer productivity, monday.com +32% output per developer, Salesforce +30% engineering productivity, Bank of America 30% less coding effort (≈2,000 people).
+**Expansion II (Disclosure Register, section 2c):** Verified code-share disclosures now span 37 companies and cluster between 50% and 90% (HubSpot 97% AI-assisted, Chime 84%, Instacart >80%, MakeMyTrip >75%, DocuSign ~75%, Airbnb ~60%, DoorDash "closer to two-thirds", Pinterest ~50%, Workday >50%, Baidu >50%). Output metrics are per-engineer activity counts: Uber 2x code output per engineer, Block +150% code changes per engineer, Coinbase +~80% PRs per engineer, Robinhood +50% commits per engineer, IBM +45% developer productivity, monday.com +32% output per developer, Salesforce +30% engineering productivity, Bank of America 30% less coding effort (≈2,000 people).
 
 **The Telemetry Gap:** Most disclosures are *input* metrics (share of code written by AI). Output-side numbers are per-engineer activity counts; only Grab (up to 30% faster time to market) and monday.com (38% shorter time to market) disclose a delivery-speed figure, and no company reports DORA metrics (lead time, deployment frequency). Apple, Netflix, Cisco and GitLab disclose no internal engineering output metric. Non-disclosure is itself the finding. Our **working hypothesis (not a disclosed metric)** is that review-bottlenecked, end-to-end organisational shipping gains sit around 5%–15%; the two time-to-market disclosures exceed that range, so the hypothesis should be treated as contested.
 
@@ -37,17 +37,14 @@
 | **Google** | Oct 2024 | Internal AI coding tools | **>25%** of new code AI-generated | Not disclosed | ✅ |
 | | Fall 2025 | Internal AI coding tools | **50%** of new code (restated Apr 2026) | Not disclosed | ✅ |
 | | Apr 2026 | Agentic workflows | **75%** of new code AI-generated & approved by engineers | One complex migration 6x faster (anecdote) | ✅ |
-| **Microsoft** | Apr 2025 | GitHub Copilot | 20%–30% of repo code (CEO, via Mashable) | — | ⚠️ media |
-| | Feb–Dec 2025 | GitHub Copilot | 16,223 Cloud+AI engineers studied | **+40.5% PRs**, highest vs zero usage weeks (preprint) | ✅ |
+| **Microsoft** | Feb–Dec 2025 | GitHub Copilot | 16,223 Cloud+AI engineers studied | **+40.5% PRs**, highest vs zero usage weeks (preprint) | ✅ |
 | **GitHub (Microsoft)** | 2022 | GitHub Copilot | RCT, 95 recruited developers | One task **55.8% faster** (71 vs 161 min) | ✅ |
 | **Amazon** | 2024 | Amazon Q Developer | **>50%** of production Java systems upgraded in <6 months | **4,500 dev-years** saved; 50 dev-days → hours; 79% of auto-generated code reviews shipped unchanged; $260M/yr | ✅ |
 | **Stripe** | Feb 2026 | Minions (one-shot agents) | Not disclosed | **>1,000 merged PRs/week** fully Minion-produced, human-reviewed | ✅ |
-| **Meta** | Apr 2025 | — | ~half of development by AI "in the next year" | — | ⚠️ target |
-| | H1 2026 | — | Creation org: 65% of engineers writing >75% of committed code with AI | — | ⚠️ target (leaked doc) |
+| **Meta** | 2025 (Q4 remarks) | Agentic coding tools | Not disclosed | **+30% output per engineer** since start of 2025; +80% for AI power users | ✅ |
 | **Klarna** | Feb 2024 | OpenAI-powered assistant | 2.3M chats, two-thirds of support chats | **700 FTE** equivalent; resolution 11 → <2 min | ✅ |
-| | Q3 2025 | AI assistant | — | 853 FTE equivalent; $60M saved | ⚠️ media |
 
-**Removed in the 2026-10-12 audit (no source found anywhere):** Google "+20%/+40% velocity" and "cycle times down 35%"; Microsoft "Copilot Workspace >90% DAU", "security remediation 62% faster", 2026 "multi-agent" row; Amazon 2025 "30,000+ production apps" (source says "tens of thousands"), 2026 "lead times down 90%+"; Stripe 2025 "500 PRs/week"; Meta 2024 "Code Llama 20% acceptance", 2025 "MetaCode 40% of code AI-assisted"; Klarna 2025 "80% of support volume" and 2026 "hybrid rebalance".
+**Removed in the 2026-10-12 audit (no source found anywhere):** Google "+20%/+40% velocity" and "cycle times down 35%"; Microsoft "Copilot Workspace >90% DAU", "security remediation 62% faster", 2026 "multi-agent" row; Amazon 2025 "30,000+ production apps" (source says "tens of thousands"), 2026 "lead times down 90%+"; Stripe 2025 "500 PRs/week"; Meta 2024 "Code Llama 20% acceptance", 2025 "MetaCode 40% of code AI-assisted"; Klarna 2025 "80% of support volume" and 2026 "hybrid rebalance". **Removed in the 2026-10-13 audit (media-only, no primary text):** Microsoft CEO "20 to 30 percent" (Mashable); Meta code-share targets (Mashable, Livemint); Klarna 853 FTEs / $60M (CX Dive); Google "Goose" (Business Insider).
 
 ### 2b. Cross-Company Empirical Comparison: Expansion Set
 
@@ -69,20 +66,19 @@
 | **Cisco** | — | — | Executive AI-coding targets appear only in trade-press interviews; not verified (source blocked) | None | Telemetry gap | — |
 | **GitLab** | Q1 FY27 | — | Customer metrics only (Zillow +40% code/engineer) | None for own R&D | Telemetry gap | IR prepared remarks |
 | **Apple / Netflix** | — | — | No internal engineering metric found | None | Telemetry gap | — |
-| **Salesforce** | Feb 2025 | AI coding tools | "We're seeing 30% productivity increase on engineering" (now in section 2c); separately, CEO media claim that AI does "30–50% of the work" | Productivity claim; no delivery metric | ✅ partial | Earnings call |
+| **Salesforce** | Feb 2025 | AI coding tools | "We're seeing 30% productivity increase on engineering" (now in section 2c) | Productivity claim; no delivery metric | ✅ | Earnings call |
 
 **Comparability warning:** the denominators differ: *new code* (Zeta, Compass), *committed code* (N-able, FactSet), *internal code / software development* (Cognizant), *merged PRs* (Shopify). FactSet's 27% covers adopting teams only. None of these is an end-to-end delivery metric.
 
-### 2c. Disclosure Register: 53 Additional Companies (expansion II, verified 2026-10-12)
+### 2c. Disclosure Register: 49 companies, 57 statements (re-verified 2026-10-13)
 
-Every row was checked word-for-word against the linked source. ✅ = primary source (earnings call transcript, SEC filing, investor document, company blog, CEO post). ⚠️ = media report, interview or AI-vendor page. YouTube-only claims (e.g. Robinhood's and CRED's podcast figures, Intercom, Cursor's 30% video remark) were excluded because their wording could not be checked. Rows for Google, Meta, MercadoLibre and FactSet add new data points to companies already covered above.
+Every row was checked word-for-word against the linked source, and every row is a primary source (earnings call transcript, SEC filing, investor document, company blog, CEO post). Media reports, interviews and AI-vendor customer pages were removed on 2026-10-13. YouTube-only claims (e.g. Robinhood's and CRED's podcast figures, Intercom, Cursor's 30% video remark) were excluded because their wording could not be checked. Rows for Google, Meta, MercadoLibre and FactSet add new data points to companies already covered above.
 
 | Company | Date | Metric | Value | Exact quote (speaker) | Source | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **1stdibs** | 2026-05-08 | Code share: New code from AI-assisted development | >50% (from ~30%) | "AI-assisted development now accounts for over 50% of our new code, up from approximately 30% last quarter" (Management (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/06/01/1stdibs-dibs-q1-2026-earnings-transcript/) | ✅ |
 | **ADT** | 2026-04-30 | Code share: Committed software code written by AI | >50% | "As of last month, over half of our committed software code is being written by AI." (Omar Khan, President, ADT Smart Home (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/04/30/adt-adt-q1-2026-earnings-call-transcript/) | ✅ |
 | **Airbnb** | 2026-05-07 | Code share: Code engineers produce that is written by AI | ~60% | "Nearly 60% of the code our engineers produce is now written by AI" (Brian Chesky, CEO (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/07/airbnb-abnb-q1-2026-earnings-call-transcript/) | ✅ |
-| **Alibaba** | undated | Code share: Current code generated by AI | 30% of current code | "Cai Chongxin recently revealed that 30% of Alibaba's current code is generated by AI." (36Kr report) | [eu.36kr.com](https://eu.36kr.com/en/p/3512870506158984) | ⚠️ |
 | **Angi** | 2026-05-06 | Output: Speed of building platform agents with agentic coding | 2x build speed | "leveraging a agentic coding to build these agents in the platform twice as fast as we could before" (Management (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/06/angi-angi-q1-2026-earnings-call-transcript/) | ✅ |
 | **Anthropic** | 2026-06-04 | Code share: Code merged into the codebase authored by Claude | >80% | "As of May 2026, more than 80% of the code we merge into Anthropic's codebase was authored by Claude." (The Anthropic Institute) | [anthropic.com](https://www.anthropic.com/institute/recursive-self-improvement) | ✅ |
 | **Augment Code** | 2026-09-11 | Code share: New code written by AI | ~100% (Nov 2025) | "By November 2025, AI was already writing nearly 100% of Augment's new code." (Company blog) | [augmentcode.com](https://www.augmentcode.com/blog/beyond-ai-coding-agents-how-we-built-augments-software-factory) | ✅ |
@@ -91,7 +87,6 @@ Every row was checked word-for-word against the linked source. ✅ = primary sou
 | **Block** | 2026-05-07 | Code share: Production code changes made nearly fully autonomously | 15% (near-autonomous) | "is making 15% of our production code changes nearly fully autonomously" (Q1 2026 shareholder letter (SEC)) | [sec.gov](https://www.sec.gov/Archives/edgar/data/0001512673/000119312526212032/d132441dex991.htm) | ✅ |
 | **Block** | 2026-08-05 | Output: Production code changes AI helped write and review; code changes per engineer | "nearly all" changes; +150% changes/engineer | "in June, agentic AI helped write and review nearly all of our production code changes" (Q2 2026 shareholder letter (SEC) and call) | [sec.gov](https://www.sec.gov/Archives/edgar/data/1512673/000119312526335117/d91486dex991.htm) | ✅ |
 | **Chime** | 2026-05-06 | Code share: Code shipped in March developed with AI | 84% (Mar 2026) | "84% of the code we shipped in March was developed with AI, up from 29% just 4 months ago." (Chris Britt, CEO (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/07/chime-chym-q1-2026-earnings-call-transcript/) | ✅ |
-| **Citi** | 2025-10-14 | Capacity: Weekly developer capacity freed by AI | 100,000 hrs/week freed | "free up 100,000 hours of weekly capacity for software developers" (Jane Fraser, CEO (Q3 2025 call, via Reuters)) | [globalbankingandfinance.com](https://www.globalbankingandfinance.com/citigroup-ai-two/) | ⚠️ |
 | **Cloudflare** | 2026-05-07 | Adoption: Engineers using AI coding tools; contributions reviewed by AI agents | 97% engineers; 100% AI-reviewed | "For team members in engineering, 97% use AI coding tools powered by the same Workers developer platform we ship to our customers, and 100% of their contributions to our production codebases are now reviewed by autonomous AI agents." (Management (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/07/cloudflare-net-q1-2026-earnings-call-transcript/) | ✅ |
 | **Cognition** | 2026-05-27 | Code share: Code committed by engineers that Devin committed | 89% | "at Cognition, 89% of code committed by our engineers is committed by Devin" (Cognition team (Series D post)) | [cognition.com](https://cognition.com/blog/series-d) | ✅ |
 | **Coinbase** | 2025-09-03 | Code share: Daily code written that is AI-generated | ~40% | "~40% of daily code written at Coinbase is AI-generated." (Brian Armstrong, CEO (post on X)) | [x.com](https://x.com/brian_armstrong/status/1963315806248604035) | ✅ |
@@ -108,7 +103,6 @@ Every row was checked word-for-word against the linked source. ✅ = primary sou
 | **Freshworks** | 2026-05-05 | Code share: Code originated in AI | >50% | "Over half of our code is originated in AI today." (Dennis Woodside, CEO (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/05/freshworks-frsh-q1-2026-earnings-transcript/) | ✅ |
 | **Fubo** | 2026-05-06 | Code share: Code completed with AI | ~35% | "about 35% of all of our code is now completed with AI." (David Gandler, CEO) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/06/fubotv-fubo-q2-2026-earnings-transcript/) | ✅ |
 | **Gemini Space Station** | 2026-03-19 | Code share: Production code changes that used AI | >40% (from 8%) | "Today, AI is used in more than 40% of our production code changes" (Cameron Winklevoss, CEO (Q4 2025 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/03/25/gemini-space-station-gemi-earnings-transcript/) | ✅ |
-| **Genspark** | 2026-02-19 | Code share: Code written by AI | 90%+ | "90 plus percent of code in our company at Genspark is written by AI." (Wen Sang, COO (ProductLed podcast)) | [pod.wave.co](https://pod.wave.co/podcast/productled-podcast/warp-speed-how-genspark-hit-155m-arr-in-10-months) | ⚠️ |
 | **GoDaddy** | 2026-02-24 | Code share: Code generated by AI tools | majority | "AI tools are now generating the majority of our code." (Aman Bhutani, CEO (Q4 2025 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/04/22/godaddy-gddy-q4-2025-earnings-transcript/) | ✅ |
 | **Google** | 2025-04-24 | Code share: Code checked in that involves accepting AI-suggested solutions | >30% | "25% of code that’s checked in involves people accepting AI-suggested solutions. That number is well over 30% now." (Sundar Pichai, CEO (Q1 2025 call)) | [webflow.rev.com](https://webflow.rev.com/transcripts/alphabet-q1-2025-earnings-call) | ✅ |
 | **Google** | 2026-02-04 | Code share: Code written by coding agents, reviewed by engineers | ~50% | "about 50% of our codes are written by agents, coding agents" (Anat Ashkenazi, CFO (Q4 2025 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/02/04/alphabet-googl-q4-2025-earnings-call-transcript/) | ✅ |
@@ -119,23 +113,18 @@ Every row was checked word-for-word against the linked source. ✅ = primary sou
 | **Infosys** | 2026-01-14 | Capacity: Lines of code generated using AI | 28M+ lines generated | "Our teams have generated over 28 mn lines of code using AI." (Salil Parekh, CEO (Q3 FY26 call, SEC 6-K)) | [sec.gov](https://www.sec.gov/Archives/edgar/data/1067491/000106749126000004/exv99w05.htm) | ✅ |
 | **Instacart** | 2025-08-07 | Code share: Code deployed in Q2 that was AI-assisted | >80% (AI-assisted) | "More than 80% of the code we deployed in Q2 continues to be AI-assisted." (Fidji Simo, CEO (Q2 2025 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2025/08/07/instacart-cart-q2-2025-earnings-call-transcript/) | ✅ |
 | **Intuit** | 2025-02-25 | Output: Coding speed with AI code assistants | up to 40% faster coding | "We're also seeing improved coding productivity with up to 40% faster coding using AI code assistants" (Management (Q2 FY25 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2025/02/25/intuit-intu-q2-2025-earnings-call-transcript/) | ✅ |
-| **JPMorgan Chase** | 2025-03-14 | Output: Engineer productivity with in-house coding assistant | +10%–20% productivity | "increased their productivity 10% to 20% by using a coding assistant tool developed by the bank" (Lori Beer, Global CIO (via Reuters)) | [teiss.co.uk](https://www.teiss.co.uk/news/jpmorgan-engineers-efficiency-jumps-as-much-as-20-from-using-coding-assistant-15492) | ⚠️ |
 | **Lyft** | 2026-05-07 | Adoption: Engineer adoption of a new AI coding tool | 80%+ engineers in 35–45 days | "a new tool has gotten to 80-some percent adoption over the course of 35 to 45 days" (David Risher, CEO (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/07/lyft-lyft-q1-2026-earnings-call-transcript/) | ✅ |
 | **MakeMyTrip** | 2026-08-05 | Code share: Code generated by AI | >75% | "AI now generates more than 75% of our code" (Rajesh Magow, CEO (Q1 FY27 call)) | [webull.com](https://www.webull.com/news/15378440584635392) | ✅ |
 | **MercadoLibre** | 2026-08-05 | Code share: Code done by AI (20,000 developers using AI) | majority ("human written code is the exception") | "Today, human written code is the exception. All of the code, the majority of the code is done by AI." (Marcos Galperin, CEO (Q2 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/08/12/mercadolibre-meli-q2-2026-earnings-call-transcript/) | ✅ |
 | **Meta** | 2026-01-28 | Output: Output per engineer since start of 2025 | +30% output/engineer; +80% power users | "Since the beginning of 2025, we've seen a 30% increase in output per engineer, with the majority of that growth coming from the adoption of agentic coding, which saw a big jump in Q4." (Susan Li, CFO (Q4 2025 prepared remarks)) | [s21.q4cdn.com](https://s21.q4cdn.com/399680738/files/doc_financials/2025/q4/META-Q4-2025-Prepared-Remarks.pdf) | ✅ |
 | **monday.com** | 2026-05-11 | Output: Output per developer; product time to market | +32% output/developer; -38% time to market | "Since 2025, AI has driven a 32% increase in our output per developer and a 38% reduction in product time to market." (Management (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/11/mondaycom-mndy-q1-2026-earnings-transcript/) | ✅ |
-| **Morgan Stanley** | 2025-07-01 | Capacity: Developer hours saved by DevGen.AI | >280,000 hours saved | "A team of engineers saved Morgan Stanley more than 280,000 hours this year." (Business Insider (via AOL)) | [aol.com](https://www.aol.com/team-engineers-saved-morgan-stanley-094301348.html) | ⚠️ |
 | **nCino** | 2026-05-27 | Code share: Code written with AI assistance | ~57% (from ~21%) | "In the first quarter of fiscal 26, approx. 21% of our code was written with AI assistance. That percentage increased to approx. 57% as of the first quarter of fiscal 27." (Sean Desmond, CEO (Q1 FY27 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/28/ncino-ncno-q1-2027-earnings-call-transcript/) | ✅ |
-| **OpenAI** | 2026-02-17 | Code share: Code of the Codex app written by Codex | >90% (Codex app) | "Codex itself writes more than 90% of the app’s code, the team estimates." (Codex team via The Pragmatic Engineer) | [newsletter.pragmaticengineer.com](https://newsletter.pragmaticengineer.com/p/how-codex-is-built) | ⚠️ |
 | **Pinterest** | 2025-02-06 | Code share: Code base generated by AI coding assistance | ~15% of codebase | "roughly 15% of our code base is AI generated through this coding assistance" (Bill Ready, CEO (Q4 2024 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2025/02/06/pinterest-pins-q4-2024-earnings-call-transcript/) | ✅ |
 | **Pinterest** | 2026-02-12 | Code share: New code that is AI-generated | ~50% | "roughly 50% of our new code is AI-generated." (Bill Ready, CEO (Q4 2025 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/02/12/pinterest-pins-q4-2025-earnings-call-transcript/) | ✅ |
 | **Robinhood** | 2026-04-28 | Output: Commits per engineer since start of 2025; employee AI adoption | +50% commits/engineer; 90% use AI | "It hit a new high in Q1, and it's up 50% since the start of last year" (Vladimir Tenev, CEO (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/04/28/robinhood-hood-q1-2026-earnings-transcript/) | ✅ |
 | **Salesforce** | 2025-02-26 | Output: Engineering productivity; engineer hiring | +30% engineering productivity | "And we're not going to hire any new engineers this year. We're seeing 30% productivity increase on engineering" (Marc Benioff, CEO (Q4 FY25 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2025/02/26/salesforce-crm-q4-2025-earnings-call-transcript/) | ✅ |
 | **Snap** | 2026-02-04 | Code share: New code that is AI-generated | ~40% | "something like 40% of new code at Snap is AI generated" (Evan Spiegel, CEO (Q4 2025 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/02/04/snap-snap-q4-2025-earnings-call-transcript/) | ✅ |
 | **Snap** | 2026-04-15 | Code share: New code generated by AI | 65%+ | "of new code generated by AI" (Snap investor update (SEC)) | [sec.gov](https://www.sec.gov/Archives/edgar/data/1564408/000119312526155861/d36756dex992.htm) | ✅ |
-| **Spotify** | 2026-06-29 | PR share: PRs attributed to being AI-authored | 73% of PRs | "I think by now 73% of PRs are directly attributed to being AI-authored." (Niklas Gustavsson, Chief Architect) | [claude.com](https://claude.com/customers/spotify-boris-office-hours) | ⚠️ |
-| **Tencent** | undated | Code share: Newly added code that is AI-generated; >90% of engineers use CodeBuddy | >50% of new code | "In newly added code, the proportion of AI - generated code exceeds 50%." (36Kr report) | [eu.36kr.com](https://eu.36kr.com/en/p/3512870506158984) | ⚠️ |
 | **Uber** | 2026-05-06 | Code share: Committed code built by autonomous agents | ~10% | "About 10% of our code now is committed. That committed is built by agents, autonomous agents out there." (Dara Khosrowshahi, CEO (Q1 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/05/06/uber-uber-q1-2026-earnings-call-transcript/) | ✅ |
 | **Uber** | 2026-08-05 | Output: Code output per engineer; AI coding tool adoption | 2x output/engineer; ~100% adoption | "We are seeing, at the moment, near 100% adoption with our engineers on AI-based coding tools. And for the measurement that we are looking at right now, we are seeing a doubling in the code output per engineer." (Uber management (Q2 2026 call)) | [fool.com](https://www.fool.com/earnings/call-transcripts/2026/08/12/uber-uber-q2-2026-earnings-call-transcript/) | ✅ |
 | **Uber** | 2026-08-27 | PR share: Pull requests attributed to local or cloud agents | >70% of PRs | "More than 70% of pull requests are attributed to local or cloud agents." (Uday Kiran Medisetty, Distinguished Engineer) | [uber.com](https://www.uber.com/us/en/blog/efficient-software-factory/) | ✅ |
@@ -149,7 +138,7 @@ Every row was checked word-for-word against the linked source. ✅ = primary sou
 
 ## 3. Five Key Structural Discoveries
 
-1.  **The Bottleneck Inversion (interpretation):** AI is drafting a large share of code (Google 75%, Zeta 89.6%), but delivery metrics have not followed in any disclosure. Faros AI telemetry summarised by Port (both vendors) found PRs merged +98% but review time +91% and delivery velocity flat. Our reading: the bottleneck moves to **code review, integration testing, and architectural validation**.
+1.  **The Bottleneck Inversion (interpretation):** AI is drafting a large share of code (Google 75%, Zeta 89.6%), but delivery metrics have not followed in any disclosure. Faros AI telemetry from 10,000+ developers (vendor research) found high-adoption teams merged 98% more PRs, but review time rose 91% and there was "no significant correlation" between AI adoption and company-level improvement. Our reading: the bottleneck moves to **code review, integration testing, and architectural validation**.
 2.  **The Modernization Dividend (Amazon Q, Google):** The largest *quantified* gains disclosed are on mechanical upgrade and migration work (Amazon Java 17 upgrades: ~50 developer-days → hours; Google: one complex migration 6x faster). That testable, well-specified work suits AI is our interpretation, not a company claim.
 3.  **The Autonomous Agent Leap (Stripe Minions, Shopify River):** Moving from passive autocomplete in an IDE to asynchronous background agents triggered from Slack yields >1,000 merged PRs/week at Stripe and 1 in 8 merged PRs at Shopify, without developers babysitting the generation process.
 4.  **Who Benefits Most (unquantified):** The 2022 Copilot RCT reports heterogeneous effects that "show promise for AI pair programmers to help people transition into software development careers." No primary source in this dataset quantifies a seniority gap (the earlier "+50% to +80%" figure was unsourced and has been removed).
@@ -167,81 +156,73 @@ Every row was checked word-for-word against the linked source. ✅ = primary sou
    * *Source:* Sundar Pichai, Cloud Next 2026 remarks on blog.google (April 22, 2026).
    * *URL:* [https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/cloud-next-2026-sundar-pichai/](https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/cloud-next-2026-sundar-pichai/)
    * *Quote:* "Today, 75% of all new code at Google is now AI-generated and approved by engineers, up from 50% last fall." … "a particularly complex code migration done by agents and engineers working together was completed six times faster than was possible a year ago with engineers alone."
-3. **Google (Goose internal model):**
-   * *Source:* Business Insider, citing leaked internal documents (February 2024).
-   * *URL:* [https://www.businessinsider.com/google-goose-ai-model-language-ai-coding-2024-2](https://www.businessinsider.com/google-goose-ai-model-language-ai-coding-2024-2)
-   * *Quote:* Goose is a "descendant of Gemini" … "trained on the sum total of 25 years of engineering expertise at Google" … "Goose has a 28k token context window".
-4. **Microsoft (+40.5% PRs, highest vs zero usage weeks):**
+3. **Microsoft (+40.5% PRs, highest vs zero usage weeks):**
    * *Source:* arXiv:2606.00438, Heilman, Kyllo & Murphy-Hill (Microsoft), "GitHub Copilot and Developer Productivity: An Observational Dose-Response Analysis" (submitted May 30, 2026). Preprint, not peer-reviewed. 16,223 IC engineers in Microsoft Cloud+AI, 43 weeks (Feb 23 – Dec 21, 2025).
    * *URL:* [https://arxiv.org/abs/2606.00438](https://arxiv.org/abs/2606.00438)
    * *Quote:* "Engineers are estimated to complete 40.5% more PRs in their highest GHCP usage weeks relative to their zero-usage weeks, holding measured development effort constant."
-5. **Microsoft (20%–30% of repo code, media-reported):**
-   * *Source:* Satya Nadella at LlamaCon (April 29, 2025), as reported by Mashable.
-   * *URL:* [https://mashable.com/article/llamacon-mark-zuckerberg-ai-writes-meta-code](https://mashable.com/article/llamacon-mark-zuckerberg-ai-writes-meta-code)
-   * *Quote:* "Maybe 20 to 30 percent of the code that is inside of our repos today, and some of our projects, are probably all written by [AI] software."
-6. **GitHub / Microsoft Research (55.8% faster on one task):**
+4. **GitHub / Microsoft Research (55.8% faster on one task):**
    * *Source:* arXiv:2302.06590 (Peng, Kalliamvakou, Cihon, Demirer; Feb 13, 2023) & GitHub research blog (Sept 7, 2022). 95 recruited professional developers (not Microsoft employees), one task: an HTTP server in JavaScript.
    * *URL:* [https://arxiv.org/abs/2302.06590](https://arxiv.org/abs/2302.06590) & [https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/](https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/)
    * *Quote:* "The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group." GitHub: Copilot users "took on average 1 hour and 11 minutes … while the developers who didn't use GitHub Copilot took on average 2 hours and 41 minutes."
-7. **Amazon (4,500 developer-years, 79% of auto-generated code reviews, $260M):**
+5. **Amazon (4,500 developer-years, 79% of auto-generated code reviews, $260M):**
    * *Source (primary):* Andy Jassy LinkedIn post (August 22, 2024). *Supporting:* AWS DevOps blog (August 1, 2024), which states the 4,500 years and $260M but **not** the 79% or 50-developer-day figures.
    * *URL:* [https://www.linkedin.com/posts/andy-jassy-8b1615_one-of-the-most-tedious-but-critical-tasks-activity-7232374162185461760-AdSz/](https://www.linkedin.com/posts/andy-jassy-8b1615_one-of-the-most-tedious-but-critical-tasks-activity-7232374162185461760-AdSz/) & [https://aws.amazon.com/blogs/devops/amazon-q-developer-just-reached-a-260-million-dollar-milestone/](https://aws.amazon.com/blogs/devops/amazon-q-developer-just-reached-a-260-million-dollar-milestone/)
    * *Quote:* "The average time to upgrade an application to Java 17 plummeted from what's typically 50 developer-days to just a few hours. We estimate this has saved us the equivalent of 4,500 developer-years of work (yes, that number is crazy but, real). In under six months, we've been able to upgrade more than 50% of our production Java systems to modernized Java versions … our developers shipped 79% of the auto-generated code reviews without any additional changes … providing an estimated $260M in annualized efficiency gains."
-8. **Stripe (>1,000 Merged PRs/Week):**
+6. **Stripe (>1,000 Merged PRs/Week):**
    * *Source:* Stripe Developer Blog, Alistair Gray (February 9, 2026).
    * *URL:* [https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents](https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents)
    * *Quote:* "Over a thousand pull requests merged each week at Stripe are completely minion-produced."
    * *Note:* InfoQ (March 20, 2026) reports "over 1,300 pull requests per week, up from 1,000 in earlier trials" from Stripe engineers ([infoq.com](https://www.infoq.com/news/2026/03/stripe-autonomous-coding-agents/)); secondary, not used.
-9. **Meta (targets only):**
-   * *Source:* Zuckerberg at LlamaCon (April 29, 2025) via Mashable; leaked internal document reported by Business Insider, via Livemint (March 27, 2026).
-   * *URL:* [https://mashable.com/article/llamacon-mark-zuckerberg-ai-writes-meta-code](https://mashable.com/article/llamacon-mark-zuckerberg-ai-writes-meta-code) & [https://www.livemint.com/companies/news/mark-zuckerberg-accelerates-metas-ai-native-overhaul-with-strict-ai-coding-targets-for-engineers-report-11774591169815.html](https://www.livemint.com/companies/news/mark-zuckerberg-accelerates-metas-ai-native-overhaul-with-strict-ai-coding-targets-for-engineers-report-11774591169815.html)
-   * *Quote:* Zuckerberg: "our bet is sort of that in the next year... maybe half the development is going to be done by AI as opposed to people" (Mashable notes it is unclear whether he meant Llama or Meta overall). Livemint: the creation org "has set a target for the first half of 2026 for 65% of engineers to write more than 75% of their committed code using AI."
-10. **Klarna (700 FTEs, resolution 11 → <2 min; customer service):**
+7. **Klarna (700 FTEs, resolution 11 → <2 min; customer service):**
    * *Source:* Klarna press release (February 27, 2024).
    * *URL:* [https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/](https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/)
    * *Quote:* "The AI assistant has had 2.3 million conversations, two-thirds of Klarna's customer service chats. It is doing the equivalent work of 700 full-time agents … Customers now resolve their errands in less than 2 mins compared to 11 mins previously."
-11. **Klarna (853 FTEs, $60M; media-reported):**
-   * *Source:* CX Dive (November 20, 2025), reporting the Q3 2025 earnings call; primary transcript not verified.
-   * *URL:* [https://www.customerexperiencedive.com/news/klarna-says-ai-agent-work-853-employees/805987/](https://www.customerexperiencedive.com/news/klarna-says-ai-agent-work-853-employees/805987/)
-   * *Quote:* The AI customer service agent "can now do the work of more than 853 full-time agents, according to Klarna CEO and co-founder Sebastian Siemiatkowski."
-12. **FactSet (27% of Committed Code, Adopting Teams):**
+8. **FactSet (27% of Committed Code, Adopting Teams):**
    * *Source:* FactSet Q3 FY2026 Earnings Call, CEO Sanoke Viswanathan (July 1, 2026). Motley Fool verbatim transcript.
    * *URL:* [https://www.fool.com/earnings/call-transcripts/2026/07/01/factset-fds-q3-2026-earnings-call-transcript/](https://www.fool.com/earnings/call-transcripts/2026/07/01/factset-fds-q3-2026-earnings-call-transcript/)
    * *Quote:* "Coding agents now author 27% of committed code in the engineering teams using these tools." … "we initiated a roughly 10% reduction in our technology workforce"
-13. **Zeta Global (89.6% of New Code):**
+9. **Meta (+30% output per engineer):**
+   * *Source:* Susan Li, CFO, Meta Q4 2025 prepared remarks (January 28, 2026), Meta investor site.
+   * *URL:* [https://s21.q4cdn.com/399680738/files/doc_financials/2025/q4/META-Q4-2025-Prepared-Remarks.pdf](https://s21.q4cdn.com/399680738/files/doc_financials/2025/q4/META-Q4-2025-Prepared-Remarks.pdf)
+   * *Quote:* see section 2c (Meta output row); "We're seeing even stronger gains with power users of AI coding tools, whose output has increased 80% year-over-year."
+10. **Zeta Global (89.6% of New Code):**
    * *Source:* Zeta Global Q2 2026 Earnings Call, CEO David Steinberg (August 4, 2026). Motley Fool verbatim transcript.
    * *URL:* [https://www.fool.com/earnings/call-transcripts/2026/08/11/zeta-global-zeta-q2-2026-earnings-call-transcript/](https://www.fool.com/earnings/call-transcripts/2026/08/11/zeta-global-zeta-q2-2026-earnings-call-transcript/)
    * *Quote:* "In the second quarter, 90% of our new code generated was automated." … "the actual number for Q2 was 89.6%." … "using our internal workflow management tool, Spade, we were able to literally automate 75% of all new code generated" (Q1).
-14. **Compass (30–40% → 50–60% of New Code; +20% Velocity):**
+11. **Compass (30–40% → 50–60% of New Code; +20% Velocity):**
    * *Source:* Compass Q1 2026 (May 5, 2026) and Q2 2026 (August 6, 2026) Earnings Calls, CEO Robert Reffkin. Motley Fool transcripts syndicated on AOL.
    * *URL:* [Q1 transcript](https://www.aol.com/articles/compass-comp-q1-2026-earnings-151715369.html) & [Q2 transcript](https://www.aol.com/articles/compass-comp-q2-2026-earnings-235837000.html)
    * *Quote:* Q1: "We now estimate that 30% to 40% of all new code written at Compass is produced by AI, which is helping accelerate product development velocity by 20%, while keeping our technology OpEx unchanged." Q2: "across the technology organization, 50% to 60% of all new code is now produced by AI"
-15. **N-able (47% of Committed Code):**
+12. **N-able (47% of Committed Code):**
    * *Source:* N-able Q2 2026 Earnings Call, CEO John Pagliuca (August 10, 2026). Motley Fool verbatim transcript.
    * *URL:* [https://www.fool.com/earnings/call-transcripts/2026/08/17/n-able-nabl-q2-2026-earnings-call-transcript/](https://www.fool.com/earnings/call-transcripts/2026/08/17/n-able-nabl-q2-2026-earnings-call-transcript/)
    * *Quote:* "AI-generated code accounting for 47% of all committed code in the second quarter" … "some features shipping 10x to 12x faster than prior road map estimates"
-16. **Cognizant (~30% → >40%):**
+13. **Cognizant (~30% → >40%):**
    * *Source:* Cognizant IR-hosted corrected transcripts, CEO Ravi Kumar S: Q3 2025 (Oct 29, 2025), Q1 2026 (Apr 29, 2026), Q2 2026 (Jul 29, 2026).
    * *URL:* [Q3 2025](https://cognizant.q4cdn.com/123993165/files/doc_earnings/2025/q3/transcript/Transcript_CTSHQ3-2025-Earnings-Call.pdf) · [Q1 2026](https://cognizant.q4cdn.com/123993165/files/doc_earnings/2026/q1/transcript/Transcript_CTSHQ1-2026-Earnings-Call.pdf) · [Q2 2026](https://cognizant.q4cdn.com/123993165/files/doc_earnings/2026/q2/transcript/Transcript_CTSHQ2-2026-Earnings-Call.pdf)
    * *Quote:* "approximately 30% of our internal code was AI-generated, significantly improving productivity of our developers. We believe it could reach 50% in the years ahead." / "nearly 40% of our code to be AI-assisted." / "Over 40% of our software development is now AI assisted."
-17. **Accenture (+8.69% PRs, +84% Successful Builds):**
+14. **Accenture (+8.69% PRs, +84% Successful Builds):**
    * *Source:* GitHub Research, "Quantifying GitHub Copilot's impact in the enterprise with Accenture" (May 13, 2024).
    * *URL:* [https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-in-the-enterprise-with-accenture/](https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-in-the-enterprise-with-accenture/)
-   * *Quote:* "Accenture developers saw an 8.69% increase in pull requests." "Accenture saw a 15% increase to the pull request merge rate." "84% increase in successful builds." Vendor-published; an independent re-analysis reports the Accenture effects were not statistically significant.
-18. **MercadoLibre (~50% Less Time Writing Code):**
+   * *Quote:* "Accenture developers saw an 8.69% increase in pull requests." "Accenture saw a 15% increase to the pull request merge rate." "84% increase in successful builds." Vendor-published (GitHub sells Copilot).
+15. **MercadoLibre (~50% Less Time Writing Code):**
    * *Source:* GitHub customer story (vendor case study, undated).
    * *URL:* [https://github.com/customer-stories/mercado-libre](https://github.com/customer-stories/mercado-libre)
    * *Quote:* "~50% reduction in time spent writing code with GitHub Copilot" · "9,000+ developers using Copilot" · "100,000 pull requests merged per day"
-19. **Shopify (1 in 8 Merged PRs Co-Authored by River):**
+16. **Shopify (1 in 8 Merged PRs Co-Authored by River):**
    * *Source:* Shopify Engineering, "Under the River", Burke Libbey & Javier Moreno (May 28, 2026).
    * *URL:* [https://shopify.engineering/under-the-river](https://shopify.engineering/under-the-river)
    * *Quote:* "one in eight merged pull requests across Shopify is coauthored by it." In a recent 30-day period: 59,918 River sessions, 5,170 Slack channels, 7,000+ people, 3,536 River-coauthored PRs merged.
-20. **GitLab (Telemetry Gap: Customer Metrics Only):**
+17. **GitLab (Telemetry Gap: Customer Metrics Only):**
    * *Source:* GitLab Q1 FY2027 Earnings Prepared Remarks (June 2, 2026).
    * *URL:* [https://s204.q4cdn.com/984476563/files/doc_financials/2027/q1/GitLab-Q1FY2027-Earnings-Prepared-Remarks.pdf](https://s204.q4cdn.com/984476563/files/doc_financials/2027/q1/GitLab-Q1FY2027-Earnings-Prepared-Remarks.pdf)
    * *Finding:* Cites customer outcomes only (Zillow: AI-assisted workflows help engineering teams "ship 40% more code per engineer"); no internal engineering output metric.
+18. **Faros AI (review bottleneck; vendor research):**
+   * *Source:* Faros AI, "The AI Productivity Paradox" research summary (telemetry from 10,000+ developers across 1,255 teams).
+   * *URL:* [https://www.faros.ai/blog/ai-software-engineering](https://www.faros.ai/blog/ai-software-engineering)
+   * *Quote:* "Developers on teams with high AI adoption complete 21% more tasks and merge 98% more pull requests, but PR review time increases 91%" … "we observed no significant correlation between AI adoption and improvements at the company level."
 
-*All URLs above returned HTTP 200 when tested on 2026-10-12. Earnings-call quotes for FactSet, Zeta Global, Compass and N-able come from Motley Fool verbatim transcripts, because company IR sites did not serve accessible transcripts. Cognizant and GitLab quotes come from IR-hosted documents.*
+*All URLs above returned HTTP 200 when tested on 2026-10-13. Earnings-call quotes for FactSet, Zeta Global, Compass and N-able come from Motley Fool verbatim transcripts, because company IR sites did not serve accessible transcripts. Cognizant and GitLab quotes come from IR-hosted documents.*
 
 ---
 
@@ -285,3 +266,13 @@ Every original figure was re-checked against its source. Corrections made:
 | Classification | ✅ verified = earnings call transcript, SEC filing, investor document, company blog, CEO's own post. ⚠️ reported = media report (Citi, JPMorgan, Morgan Stanley, Tencent, Alibaba, OpenAI Codex), interview/podcast (Genspark) or AI-vendor customer page (Spotify). |
 | Caveats | AI-vendor companies (Anthropic, Cursor, Cognition, Augment Code, OpenAI, Genspark) have a commercial interest in high figures. Definitions differ (new vs committed vs all code; AI-written vs AI-assisted; PR share vs code share). |
 
+### Audit log: III (2026-10-13)
+
+| Step | Detail |
+| :--- | :--- |
+| Scope | Every row of `data/facts.csv`, every point plotted in the briefing (trajectory chart and Disclosure Register), and every figure in the briefing's tables and cards. |
+| Method | All 77 source URLs were re-downloaded fresh (no cache) and each quote string-matched against the new copy; Motley Fool quotes had to appear in the speaker transcript, not the AI summary. 214 of 216 quote checks passed automatically; the 2 misses (Stripe page text served inside a script payload; Amazon's AWS-blog quote, which lives at its second URL) were confirmed by hand. All 79 links in the briefing return HTTP 200. |
+| Removed | All media-only, podcast and vendor-page claims: Microsoft 20–30% (Mashable), Meta code-share targets (Mashable, Livemint), Klarna 853 FTEs (CX Dive), Google "Goose" (Business Insider), Spotify, Genspark, OpenAI, Citi, JPMorgan Chase, Morgan Stanley, Tencent, Alibaba; an unlinked "independent re-analysis" note on Accenture. 13 rows removed from `facts.csv`. |
+| Corrected | Ranked chart now plots "over X%", "over half" and "majority" at the stated lower bound (was an invented 55%): Freshworks, ADT, Workday, GoDaddy, Visa, MercadoLibre, Shopify, DoorDash → 50. Augment Code "nearly 100%" → 100 (was 95). Shopify ">50% of code" (Q1 2026 call) added to `facts.csv`; it was plotted but missing from the CSV. |
+| Re-sourced | Review-bottleneck figures now cite Faros AI's own report instead of Port's summary of it. |
+| Result | 94 rows in `facts.csv`, 59 companies, all primary-sourced; one row (Cognizant's 50% goal) is a verified quote of a target and is labelled as such. |
