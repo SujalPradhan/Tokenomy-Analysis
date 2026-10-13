@@ -11,7 +11,8 @@ Interactive Executive Briefing and empirical research analyzing how internal AI 
 1. **Code share is rising; delivery evidence is not:** Google's AI-generated share of new code rose from >25% (Oct 2024) to 75% (Apr 2026), and Zeta Global reports 89.6% (Q2 2026). Almost no company ties these figures to end-to-end delivery metrics; our reading is that the bottleneck has shifted to **code review, architectural validation, and automated testing**.
 2. **The Modernization Dividend:** Amazon estimates Amazon Q Developer saved **4,500 developer-years** on Java 17 upgrades (~50 developer-days → a few hours per app); developers shipped 79% of the auto-generated code reviews without additional changes (Andy Jassy, Aug 2024).
 3. **Autonomous Agent Shipping:** Over **1,000 merged pull requests per week** at Stripe are completely produced by its one-shot **Minions** coding agents, most often started from Slack; at Shopify, 1 in 8 merged PRs is co-authored by its River agent.
-4. **Pull Request Velocity:** An observational study of 16,223 Microsoft engineers (Feb–Dec 2025; arXiv preprint) estimated **+40.5% more PRs** in highest- vs zero-Copilot-usage weeks.
+4. **Counter-evidence:** Google's DORA 2024 report estimated **−7.2% delivery stability** per 25% more AI adoption, and DORA 2025 found instability still rising. In a METR randomized trial (early 2025), experienced developers took **19% longer** with AI while estimating it saved them 20%; METR's early-2026 follow-up points the other way but calls its new data very weak evidence. Klarna's AI assistant shows limits rather than harm: the same 2024-based "over 700 agents" estimate 18 months later, no drop in satisfaction, and human agents still offered.
+5. **Pull Request Velocity:** An observational study of 16,223 Microsoft engineers (Feb–Dec 2025; arXiv preprint) estimated **+40.5% more PRs** in highest- vs zero-Copilot-usage weeks.
 
 ---
 

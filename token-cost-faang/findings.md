@@ -163,6 +163,30 @@ Not included: Angi's "twice as fast" (stated as a strategic plan, not a measured
 
 ---
 
+### 2e. Counter-Evidence: Where AI Made Things Worse, and Where It Hit Limits (verified 2026-10-13)
+
+Primary sources only (studies, reports, company filings, CEO posts). Each quote was string-matched against a freshly downloaded copy of the source. Rows use `metric_family` **N** (counter-evidence) in `facts.csv`.
+
+| Source | Date | Finding | Exact quote (speaker) | Link |
+| :--- | :--- | :--- | :--- | :--- |
+| **METR (randomized trial)** | 2025-07 | Early 2025: experienced developers took 19% longer with AI, while estimating it had saved them 20% | "Before starting tasks, developers forecast that allowing AI will reduce completion time by 24%. After completing the study, developers estimate that allowing AI reduced completion time by 20%. Surprisingly, we find that allowing AI actually increases completion time by 19%" (METR researchers (arXiv paper)) | [source](https://arxiv.org/abs/2507.09089) |
+| **METR follow-up (early 2026)** | 2026-02-24 | A year later the same developers showed a speedup, but METR calls the new data very weak evidence | "Our early 2025 study found the use of AI causes tasks to take 19% longer, with a confidence interval between +2% and +39%. For the subset of the original developers who participated in the later study, we now estimate a speedup of -18% with a confidence interval between -38% and +9%." (METR, uplift update (Feb 2026)) | [source](https://metr.org/blog/2026-02-24-uplift-update/) |
+| **Google DORA 2024** | 2024-10 | Per 25% more AI adoption: delivery stability −7.2%, throughput −1.5% | "We see that the effect on delivery throughput is small, but likely negative (an estimated 1.5% reduction for every 25% increase in AI adoption). The negative impact on delivery stability is larger (an estimated 7.2% reduction for every 25% increase in AI adoption)." (Google Cloud DORA, Accelerate State of DevOps 2024) | [source](https://services.google.com/fh/files/misc/2024_final_dora_report.pdf) |
+| **Google DORA 2025** | 2025-09 | A year later, throughput improved, but instability still rises with AI adoption | "AI adoption now improves software delivery throughput, a key shift from last year. However, it still increases delivery instability." (Google Cloud DORA, State of AI-assisted Software Development 2025) | [source](https://services.google.com/fh/files/misc/2025_state_of_ai_assisted_software_development.pdf) |
+| **Faros AI (10,000+ developers)** | 2025-07 | On high-AI-adoption teams, developers merged 98% more PRs, but review time rose 91%, with no measurable company-level gain | "we observed no significant correlation between AI adoption and improvements at the company level" (Faros AI research (engineering-analytics vendor)) | [source](https://www.faros.ai/blog/ai-software-engineering) |
+| **Stack Overflow 2025 survey** | 2025-07 | 46% of developers distrust the accuracy of AI tools; 33% trust it | "More developers actively distrust the accuracy of AI tools (46%) than trust it (33%)" (Stack Overflow Developer Survey 2025 (49,000+ responses)) | [source](https://survey.stackoverflow.co/2025/ai) |
+| **Replit** | 2025-07-20 | Replit's AI agent deleted data from a user's production database | "@Replit agent in development deleted data from the production database. Unacceptable and should never be possible." (Amjad Masad, CEO (post on X)) | [source](https://x.com/amasad/status/1946986468586721478) |
+| **Klarna** | 2024-02-27 | AI assistant does the work of 700 agents in its first month | "It is doing the equivalent work of 700 full-time agents" (Klarna press release) | [source](https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/) |
+| **Klarna** | 2025-09-02 | 18 months later (SEC prospectus): the same 2024-based "over 700" estimate, and a "dual-track" with human support | "This reflects our dual-track approach of combining broad and continuing implementation of scalable AI in our customer service with high-quality human support." (Klarna IPO prospectus (SEC F-1/A)) | [source](https://www.sec.gov/Archives/edgar/data/2003292/000200329225000024/klarnagroupplcf-1a3.htm) |
+
+**METR caveat:** METR now marks its early-2025 result "out of date". Its Feb 2026 follow-up estimates the same developers took 18% *less* time with AI (interval −38% to +9%; new recruits −4%, interval −15% to +9%), but calls this "only very weak evidence" because many developers declined to work without AI. The durable finding is the 2025 perception gap: developers estimated a 20% time saving while measured 19% slower.
+
+**Klarna (limits, not harm):** Feb 2024 press release: "the equivalent work of 700 full-time agents", two-thirds of chats, resolution 11 → under 2 min, and live agents still available on request. Sept 2025 SEC prospectus: 69% of chats "with no drop in consumer satisfaction levels", about $39M saved in 2024, the same 2024-based "over 700" estimate, and human representatives offered to every customer under a "dual-track approach". Klarna's "Customer service and operations" cost was $53M in Q3'25 vs $44M in Q3'24 while revenue grew 28% ([Q3 2025 earnings release](https://s205.q4cdn.com/644747736/files/doc_financials/2025/q3/Q3-25-Earnings-Press-Release.pdf)), so cost is not shown as a negative either.
+
+**Checked and excluded (no verifiable primary source):** the CEO's "lower quality" / "always a human" remarks (Bloomberg interview; Forbes and others report them); Klarna's "853 agents" figure (only in a third-party machine transcript of the Q3 2025 call); Commonwealth Bank's reinstatement of 45 roles (media and union only; no bank statement found); AWS outages attributed to the Kiro agent (anonymous-source reporting, disputed by Amazon's own statement); Orgvue and GitClear reports (sites block automated verification); Forrester's rehiring forecast (a prediction, not a measurement).
+
+---
+
 ## 3. Five Key Structural Discoveries
 
 1.  **The Bottleneck Inversion (interpretation):** AI is drafting a large share of code (Google 75%, Zeta 89.6%), but delivery metrics have not followed in any disclosure. Faros AI telemetry from 10,000+ developers (vendor research) found high-adoption teams merged 98% more PRs, but review time rose 91%, average PR size rose 154%, and there was "no significant correlation" between AI adoption and company-level improvement. Our reading: the bottleneck moves to **code review, integration testing, and architectural validation**.
@@ -316,3 +340,12 @@ Every original figure was re-checked against its source. Corrections made:
 | Bug found and fixed | The previous commit's speaker rename inserted commas into unquoted `sources.csv` fields, breaking nine rows; repaired, and every CSV now parses with no malformed rows. |
 | Unverified | Publication dates for the Anthropic (page shows none; quote is "as of May 2026", now dated 2026-05), Vercel (several dates on the page) and Grindr (Feb 26 vs 27, likely time zone) sources. Values are unaffected. |
 | Counts now | `facts.csv` 99 rows; 59 companies in the dataset (60 labels, "GitHub (Microsoft)" = Microsoft) plus Faros AI cross-company research; 53 companies shown in the briefing; register 49 companies / 57 statements; productivity chart 16 figures. |
+
+### Audit log: V (Anand's feedback round, 2026-10-13)
+
+| Step | Detail |
+| :--- | :--- |
+| Highlight links | 86 source links open with the quote highlighted (text fragments). Built from each page's own characters; accepted only when a simulated first match lands on the intended passage. 14 links stay plain: PDFs and X/LinkedIn posts (browsers cannot highlight them) and Stripe's blog (text rendered by script). |
+| Independent review (agent 3) | Found 4 Motley Fool links (Snap, HubSpot, DoorDash, eToro) whose highlight landed in the AI summary above the transcript; the builder now targets the transcript and adds a prefix where needed, and an independent decoder confirmed all 86 land on the intended passage. Also found the Klarna item overstated ("plateaued", "permanent", workload "stayed at 700"): reframed as limits, not harm, with the prospectus's "no drop in consumer satisfaction". |
+| METR update found | METR marks its 2025 study out of date; the Feb 2026 follow-up is shown alongside it, with METR's own "very weak evidence" caveat. |
+| Other | Arrows restored on the trend chart; inspect-bar sources clickable; static links get rel="noopener". |
