@@ -329,8 +329,8 @@
   <nav class="nav-links">
     <a href="#summary">Overview</a>
     <a href="#trajectory">Trajectory</a>
-    <a href="#register">Register</a>
     <a href="#productivity">Productivity</a>
+    <a href="#register">Register</a>
     <a href="#telemetry">Case Studies</a>
     <a href="#workflows">Workflows</a>
     <a href="#takeaways">Takeaways</a>
@@ -397,6 +397,38 @@
     <p class="chart-note">Only companies that disclosed the figure at least twice are plotted, so each line is a real trend. Definitions differ: Google, Zeta and Compass report share of <em>new</em> code (Google's Apr 2025 figure counts code "involving" accepted AI suggestions); Cognizant switched from AI-<em>generated</em> (2025) to AI-<em>assisted</em> (2026). Google's 50% "last fall" point is dated approximately. The latest figure from all 39 companies that disclosed one is ranked in the <a class="ref-link" href="#register">Disclosure Register</a>.</p>
   </section>
 
+  <!-- ================= 3b. PRODUCTIVITY EVIDENCE ================= -->
+  <section class="section-card" id="productivity">
+    <div class="section-kicker">Productivity Evidence</div>
+    <h2>Where Productivity Is Actually Measured</h2>
+    <p class="lead">The chart above, and the Disclosure Register below, measure adoption: how much code AI writes. This one collects every verified figure that measures what AI does to output, grouped from the strongest evidence (what ships, and how fast) to the weakest (a "productivity" number the company never defines). Each quote was re-checked against its source on 13 Oct 2026.</p>
+
+    <div class="callout">
+      <strong>What it shows:</strong> most evidence is <em>activity per engineer</em> (more PRs, commits or code changes), which can rise without anything shipping faster. Only three companies report a delivery outcome, and none reports standard delivery metrics such as lead time or deployment frequency. Telemetry from Faros AI (10,000+ developers) found no significant link between AI adoption and company-level delivery.
+    </div>
+
+    <div class="chart-legend static" aria-label="Chart legend">
+      <span class="lg-item"><svg width="26" height="12" aria-hidden="true"><rect x="1" y="1" width="24" height="10" rx="2" fill="#2a78d6"/></svg>Stated figure</span>
+      <span class="lg-item"><svg width="26" height="12" aria-hidden="true"><rect x="1.5" y="1.5" width="23" height="9" rx="2" fill="#2a78d6" fill-opacity=".25" stroke="#2a78d6" stroke-dasharray="3 2"/></svg>"Up to" figure <em>(best case)</em></span>
+    </div>
+    <p class="chart-note" style="margin-top:0">Bar length = size of the stated improvement, on one shared 0–200% scale. Measures differ between rows (features, PRs, commits, effort), so compare within a group, not across groups. "3x" is plotted as +200% and "2x" as +100%.</p>
+
+    <div class="inspect-bar">
+      <div>
+        <div class="insp-title" id="prodTitle">Hover or tap a bar to see the exact quote</div>
+        <div class="insp-desc" id="prodSubtitle">What was measured, and who said it</div>
+      </div>
+      <div class="insp-stats">
+        <div><div class="insp-lbl">Figure</div><div class="insp-val" id="prodValue">—</div></div>
+      </div>
+    </div>
+    <div class="quote-line" id="prodQuote"></div>
+    <div class="chart-box" style="overflow-x:auto;">
+      <svg id="prodSvg" width="100%" style="min-width:640px;" role="img" aria-label="Verified productivity figures grouped by strength of evidence"></svg>
+    </div>
+    <p class="chart-note">Not plotted: Stripe's &gt;1,000 merged agent-written PRs per week (a count with no before-and-after baseline; see Case Studies), and figures that measure inputs rather than output (Infosys's 28M AI-generated lines across client work, FactSet's coding-token growth).</p>
+  </section>
+
   <!-- ================= 3a. DISCLOSURE REGISTER ================= -->
   <section class="section-card" id="register">
     <div class="section-kicker">Disclosure Register</div>
@@ -423,38 +455,6 @@
       <svg id="rankSvg" width="100%" style="min-width:640px;" role="img" aria-label="Ranked AI code share disclosures by company"></svg>
     </div>
 
-  </section>
-
-  <!-- ================= 3b. PRODUCTIVITY EVIDENCE ================= -->
-  <section class="section-card" id="productivity">
-    <div class="section-kicker">Productivity Evidence</div>
-    <h2>Where Productivity Is Actually Measured</h2>
-    <p class="lead">The two charts above measure adoption: how much code AI writes. This one collects every verified figure that measures what AI does to output, grouped from the strongest evidence (what ships, and how fast) to the weakest (a "productivity" number the company never defines). Each quote was re-checked against its source on 13 Oct 2026.</p>
-
-    <div class="callout">
-      <strong>What it shows:</strong> most evidence is <em>activity per engineer</em> (more PRs, commits or code changes), which can rise without anything shipping faster. Only three companies report a delivery outcome, and none reports standard delivery metrics such as lead time or deployment frequency. Telemetry from Faros AI (10,000+ developers) found no significant link between AI adoption and company-level delivery.
-    </div>
-
-    <div class="chart-legend static" aria-label="Chart legend">
-      <span class="lg-item"><svg width="26" height="12" aria-hidden="true"><rect x="1" y="1" width="24" height="10" rx="2" fill="#2a78d6"/></svg>Stated figure</span>
-      <span class="lg-item"><svg width="26" height="12" aria-hidden="true"><rect x="1.5" y="1.5" width="23" height="9" rx="2" fill="#2a78d6" fill-opacity=".25" stroke="#2a78d6" stroke-dasharray="3 2"/></svg>"Up to" figure <em>(best case)</em></span>
-    </div>
-    <p class="chart-note" style="margin-top:0">Bar length = size of the stated improvement, on one shared 0–200% scale. Measures differ between rows (features, PRs, commits, effort), so compare within a group, not across groups. "3x" is plotted as +200% and "2x" as +100%.</p>
-
-    <div class="inspect-bar">
-      <div>
-        <div class="insp-title" id="prodTitle">Hover or tap a bar to see the exact quote</div>
-        <div class="insp-desc" id="prodSubtitle">What was measured, and who said it</div>
-      </div>
-      <div class="insp-stats">
-        <div><div class="insp-lbl">Figure</div><div class="insp-val" id="prodValue">—</div></div>
-      </div>
-    </div>
-    <div class="quote-line" id="prodQuote"></div>
-    <div class="chart-box" style="overflow-x:auto;">
-      <svg id="prodSvg" width="100%" style="min-width:640px;" role="img" aria-label="Verified productivity figures grouped by strength of evidence"></svg>
-    </div>
-    <p class="chart-note">Not plotted: Stripe's &gt;1,000 merged agent-written PRs per week (a count with no before-and-after baseline; see Case Studies), and figures that measure inputs rather than output (Infosys's 28M AI-generated lines across client work, FactSet's coding-token growth).</p>
   </section>
 
   <!-- ================= 3. COMPANY TELEMETRY ================= -->
